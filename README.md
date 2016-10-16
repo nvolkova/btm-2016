@@ -37,7 +37,7 @@ install.packages("rmarkdown")
 
 ##Jupyter Notebook
 
-Download the slides [here](https://github.com/nvolkova/btm-2016/blob/master/JN-slides.pdf).
+[General information](http://jupyter.org).
 
 ###Installation:
 
