@@ -56,7 +56,7 @@ To run the notebook:
 jupyter notebook
 ```
 ###Excercises:
-1. [Running the code](https://github.com/nvolkova/btm-2016/blob/master/JN-excercises/RunningCode.ipynb?raw=TRUE)
+1. [Running the code](https://nbviewer.jupyter.org/github/jupyter/notebook/blob/master/docs/source/examples/Notebook/Running%20Code.ipynb)
 2. Check out [ipython documentation webpage](https://github.com/ipython/ipython)
 3. Convert previous analyses to Python (DIY for those who wish)
 
