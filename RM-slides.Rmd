@@ -1,0 +1,116 @@
+---
+title: "R Markdown"
+author: "Nadezda Volkova"
+---
+
+```{r setup, echo=FALSE}
+options(width = 110)
+```
+
+## What is R Markdown
+
+>- Framework for creating dynamic documents, reports and presentations
+>- A tool for integration of R-code execution results into your document
+
+. . .
+
+<center>
+<img src="images/RMarkdownOutputFormats.png" alt="" style="width: 300px; height: 300px;"/>
+</center>
+
+## Why do we need it?
+
+>- To ensure reproducibility of the results
+>- To convert the .Rmd file into different formats
+    + HTML
+    + PDF
+    + MS Word (ODT, RTF)
+    + Markdown
+    + Presentations: ioslides, reveal.js, Slidy, Beamer
+    + Website templates
+>- Easy to write and format your documents
+>- To share open code, ideas, algotirhms and research results
+
+## Reproducible research and collaboration
+
+>- [Paper in "Nature"](http://www.nature.com/news/1-500-scientists-lift-the-lid-on-reproducibility-1.19970): more than 70% of respondents can not reproduce their collegues' results
+>- And it gets worse:
+    + More data
+    + Complex data analysis schemes
+    + Models and algorithms need a lot of fine tuning
+    + Traditional journal paper format is not enough anymore
+>- [Ropensci reproducibility guide](http://ropensci.github.io/reproducibility-guide/)
+
+## An introduction to Rmarkdown: Inline code
+
+>- Simplest stuff: insert the result as text inside a string
+>- Syntaxis: backtick ("`") - "r" - space - R-code - backtick
+>- Example: "The theorem is proven under the assumption pi equals `` `r knitr::inline_expr('ceiling(pi)')` ``."
+>- Result: "The theorem is proven under the assumption pi equals `r ceiling(pi)`."
+
+## An introduction to Rmarkdown: Code chunks
+
+>- The basic way to insert code
+>- Every chunkаждый кусок can be tuned separately using options
+>- Chunk may print something out, draw a plot or have no output
+
+## An introduction to Rmarkdown: Chunk syntaxis
+
+```{r, echo=FALSE, comment=""}
+cat(c("```{r}",
+      "head(iris)",
+      "```"), 
+    sep='\n')
+```
+
+. . .
+
+```{r}
+head(iris)
+```
+
+## An introduction to Rmarkdown: Option echo=FALSE
+
+>- You can put _options_ for a chunk in figure brackets
+>- By default both code and results are shown
+>- Option `echo=FALSE` supresses printing the code:
+
+. . .
+
+```{r, echo=FALSE, comment=""}
+cat(c("```{r, echo=FALSE}",
+      "(1:10)^3",
+      "```"), 
+    sep='\n')
+```
+
+. . .
+
+```{r, echo=FALSE}
+(1:10)^3
+```
+
+## An introduction to Rmarkdown: Layout
+
+>- `**Bold** __font__` --> **Bold** __font__
+>- `*Italic* _font_` --> *Italic* _font_
+>- Monospeced text `` `sum(x)` `` --> `sum(x)`
+>- Upper and lower indices `A^2^~i~` --> A^2^~i~
+>- `~~Strikeout~~ text` --> ~~Strikeout~~ text
+>- Symbols escape: `\* \_ \\ \$` --> \* \_ \\ \$ 
+>- Autocorrection of dash and long dash: `-- ---` --> -- ---
+
+## Main elements Markdown
+
+>- Headers: `# Header 1` -- `###### Header 6`
+>- Hyperlink: `<https://www.github.com/nvolkova>` --> <https://www.github.com/nvolkova>
+>- Hyperlink in text: `[My github](https://www.github.com/nvolkova)` --> [My github](https://www.github.com/nvolkova)
+>- <http://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf>
+
+## Latex support
+
+>- To biold a pdf ypu need to install $\TeX$ (MiKTeX, TeX Live)
+>- `$\hat{\beta} = (X^T X)^{-1} X^T y$` --> $\hat{\beta} = (X^T X)^{-1} X^T y$
+>- `$$i \hbar \frac{\partial}{\partial t} ... $$` --> $$i \hbar \frac{\partial}{\partial t}\Psi(\mathbf{r},t) = \hat H \Psi(\mathbf{r},t)$$
+>- All the functions available in $\TeX$ (settings, packages, macros и т.д.)
+>- Formulas are shown correctly in HTML thanks to MathJax
