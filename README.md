@@ -11,7 +11,7 @@ Materials for Basic Teaching Module in EMBL Predoc Course 2016
 - How price change varies by quality 
 - How differences in prices vary between qualities
 - Use what you've learned in ggplot2 to generate some visualisations 
-- Integerate with Rmarkdown
+- Integerte with Rmarkdown
 
 ##R Markdown
 
