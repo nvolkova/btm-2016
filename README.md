@@ -51,4 +51,4 @@ jupyter notebook
 
 ## Acknoledgements
 
-Huge thanks to [Anton Antonov](https://github.com/tonytonov) whose slides on Rmarkdown were adapted for this tutorial.
+Huge thanks to [Anton Antonov](https://github.com/tonytonov) and [Omar Wagih](https://github.com/omarwagih) whose materials on Rmarkdown were adapted for this tutorial.
