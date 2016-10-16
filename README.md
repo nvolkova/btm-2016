@@ -18,6 +18,7 @@ install.packages("rmarkdown")
 - [1. Simple syntax and code chunks](https://github.com/nvolkova/btm-2016/blob/master/RM-excecises/ex1.Rmd?raw=TRUE)
 - [2. Plotting, caching and formatting](https://github.com/nvolkova/btm-2016/blob/master/RM-excecises/ex2.Rmd?raw=TRUE)
 - 3. Putting all together (DIY)
+- Bonus: [make pretty slides with Rmarkdown](https://github.com/nvolkova/btm-2016/blob/master/RM-excecises/Bonus.Rmd?raw=TRUE)
 
 ###Play with the dataset:
 1. Upload the dataset into R
