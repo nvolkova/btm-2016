@@ -5,7 +5,24 @@ date: "20 October 2016"
 output: html_document
 ---
 
+### Plots
 
+Here is a simple scatter plot
+```{r}
+plot(1:10, main="My scatterplot")
+```
+
+Here are two plots side-by-side
+```{r}
+# Create plotting region with one row, two columns
+par(mfrow=c(1,2))
+
+# First plot
+plot(1:10, main="My scatterplot")
+
+# Second plot
+hist(rnorm(100))
+```
 
 You can add a name for your chunk after the "r" symbol like this. Note: you shouldn't have two chunks with the same name!
 ```{r chunk_name}
@@ -43,4 +60,17 @@ If you set this to `./` the figures will be saved to the directory containing th
 
 ```{r figure_chunk_2, fig.path='./'}
 plot(1:10, main="My scatterplot")
+```
+
+
+## Caching
+
+Here is a cached chunk. The first time you run it, it will take ~5 seconds to generate because we are setting the system to sleep for 5 seconds before printing (we are mimicing a computationally intensive function). Any subsequent runs should not take as long, becase the results are cached on your machine. 
+
+Play around with it a little. Try setting `cache=FALSE`. Does it run slower?
+```{r, cache=TRUE}
+# Sleep for five second
+Sys.sleep(5)
+# Print a result
+paste("This took me a long time to run!")
 ```
