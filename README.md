@@ -9,7 +9,7 @@ Download the [dataset](https://github.com/nvolkova/btm-2016/blob/master/dataset.
 
 [Download the slides](https://github.com/nvolkova/btm-2016/blob/master/RM-slides.pdf).
 
-[Download rmarkdown cheatsheet](https://github.com/nvolkova/btm-2015/blob/master/rmarkdown-cheatsheet.pdf?raw=TRUE)
+[Download rmarkdown cheatsheet](https://github.com/nvolkova/btm-2016/blob/master/rmarkdown-cheatsheet.pdf?raw=TRUE)
 
 ###Installation:
 ```r
