@@ -82,24 +82,4 @@ print(df)
 knitr::kable(df, caption="My table", align="l")
 ```
 
-
-### Plots
-
-Here is a simple scatter plot
-```{r}
-plot(1:10, main="My scatterplot")
-```
-
-Here are two plots side-by-side
-```{r}
-# Create plotting region with one row, two columns
-par(mfrow=c(1,2))
-
-# First plot
-plot(1:10, main="My scatterplot")
-
-# Second plot
-hist(rnorm(100))
-```
-
 ## End of excercise 1
