@@ -51,6 +51,6 @@ jupyter notebook
 1. [Running the code and writing the descriptions](https://github.com/nvolkova/btm-2016/blob/master/JN-excercises/RunningCode.ipynb?raw=TRUE)
 2. Converting previous analysis to Python (DIY for those who wish)
 
-## Acknoledgements
+## Acknowledgements
 
 Huge thanks to [Anton Antonov](https://github.com/tonytonov) and [Omar Wagih](https://github.com/omarwagih) whose materials on Rmarkdown were adapted for this tutorial.
