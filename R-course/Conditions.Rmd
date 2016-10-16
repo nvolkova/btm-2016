@@ -1,0 +1,247 @@
+---
+title: "Statements, loops and packages"
+author: "Nadezda Volkova, Jack Monahan"
+data: "BTM 2016"
+output: html_document
+---
+
+```{r setup, echo=FALSE}
+options(width = 110)
+```
+
+# `if` и `else`
+
+Decision making is an important part of programming. This can be achieved in R programming using the conditional __if...else__ statement.
+
+```{r, eval=FALSE}
+if (<condition>) {<do something>} else {<do another thing>}
+```
+
+>- Here \<condition\> is an expression that results in logical vector of length 1 (`TRUE` or `FALSE`, `NA` will produce an error)
+>- \<do something\> and \<do another thing\> -- arbitrary commands
+
+Check out this:
+
+```{r}
+if (sqrt(2) > 1.5) {
+  print("Greater!")
+} else {
+  print("Less!")
+}
+```
+
+NB: do not transfer `else` on a new string!
+
+The above conditional can also be written in a single line as follows.
+
+```{r, echo=FALSE}
+if (sqrt(2) > 1.5) print("Greater!") else print("Less!")
+```
+
+# Nested __if...else__ statement
+
+We can nest as many __if...else__ statement as we want as follows.
+
+Syntax of nested if...else statement:
+
+```{r, eval=FALSE}
+if ( test_expression1) {
+   statement1
+} else if ( test_expression2) {
+   statement2
+} else if ( test_expression3) {
+   statement3
+} else
+   statement4
+```
+
+Only one statement will get executed depending upon the test_expressions.
+
+```{r}
+x <- 0
+if (x < 0) {
+   print("Negative number")
+} else if (x > 0) {
+   print("Positive number")
+} else
+   print("Zero")
+```
+
+# `ifelse`
+
+If you want to avoid all the hassle with if and else and calling different variables, there is a solution!
+
+```{r}
+if (c(TRUE, FALSE)) print("Hmm...?")
+```
+
+__ifelse__ returns a value with the same shape as test which is filled with elements selected from either yes or no depending on whether the element of test is TRUE or FALSE.
+
+```{r}
+ifelse(runif(8) > 0.5, "Heads", "Tails")
+```
+
+In other words, you write `ifelse( <yes/no> , <yes-action>, <no-action>)` if you need a response of the same length as condition. You can also put as many `ifelse` inside each other as you want.
+
+```{r}
+x <- runif(8)
+ifelse(x > 2/3, "Rock", 
+       ifelse(x > 1/3, "Scissors", "Paper"))
+```
+
+# Multiple choice: `switch`
+
+There is a function __switch(EXPR, alternatives)__ that evaluates EXPR and respectively chooses one of further arguments as a response.
+
+```{r}
+switch("factorial", 
+       sum = 5 + 5,
+       product = 5 * 5,
+       factorial = factorial(5), 
+       0)
+```
+
+There is not so many cases where you could use it, but it's nice to know just in case.
+
+# Loops
+
+## `repeat`
+
+When to use: when you want to run a loop forever and break it on your own will:
+
+```{r}
+i <- 0
+repeat {
+  i <- i + runif(1)
+  print(i)
+  if (i > 5) break
+}
+```
+
+## `while`
+
+When to use: when you want something to be happening as long as some condition is satisfied
+
+```{r}
+i <- 2^14
+while (i > 1000) {
+  i <- i/2
+  print(i)
+}
+```
+
+## `for`
+
+When to use: when you are using some index that runs in pre-determined interval
+
+```{r}
+for (i in 1:8) {
+  if (i %% 2 == 0) print(i)
+}
+```
+
+Index is not necessarily integer:
+
+```{r}
+for (i in letters) {
+  if (i == "b") next
+  if (i == "d") break
+  print(i)
+}
+```
+
+**NB**: If you want to print something inside a loop, you have to call function `print`! Otherwise nothing happens:
+
+```{r}
+for (i in 1:5) i
+```
+
+## `for` vs vectorization
+
+Somethimes running things in for-loop is time-comsuming (at least a little bit).
+
+```{r, cache=TRUE}
+v <- 1:1e5
+system.time({
+  x <- 0
+  for (i in v) x[i] <- sqrt(v[i])
+})
+```
+
+So why not using R's ability to perform vector calculations?
+
+```{r}
+system.time({
+  y <- sqrt(v)
+})
+identical(x, y)
+```
+
+# Packages
+
+>- R was created to be extendable - it is based on _packages_
+>- The core of the language -- `base` package
+>- There are several other packages uploaded with `base` by default, others can be called without installation
+>- Don't mix up `package` and `library`!
+>- Again: extension modules in R are called packages.
+>- Library (in R ecosystem) - place on the disk where all available packages are stored.
+
+Check out where your packages are stored:
+
+```{r}
+.libPaths()
+```
+
+# Where to get packages
+
+>- CRAN: https://cran.r-project.org/
+>- github, bitbucket
+
+With this command you can check what packages you have already installed:
+
+```{r, eval=FALSE}
+installed.packages()
+```
+
+```{r, echo = FALSE}
+i <- as.data.frame(installed.packages())
+i <- na.omit(i[, c("Package", "Priority")])
+i[i$Priority == "base", ]
+```
+
+# Loading packages
+
+>- `library(pkgname)`: write package name without quotes
+>- Instead of `library(pkgname)` you can use `require(pkgname)`
+
+# Installing packages from CRAN
+
+This is how you install any package from CRAN, in this case "xts" package:
+
+```{r, eval=FALSE}
+install.packages("xts", dependencies = TRUE)
+```
+
+If you call `library()` for a package you did not install, you will get an error.
+
+```{r, message=F, warning=F, eval=F}
+library(xts)
+```
+
+It is nice to update packages from time to time: `update.packages()`
+
+Another very useful function if something is not working as planned: `sessionInfo()`
+
+```{r, echo=FALSE}
+sessionInfo()
+```
+
+## Bonus: installation from BioConductor
+
+As you may want to install stuff from [http://bioconductor.org]() as well, use this code:
+
+```{r, eval=FALSE}
+## try http:// if https:// URLs are not supported
+source("https://bioconductor.org/biocLite.R")
+biocLite( <package you want to istall> )
+```
