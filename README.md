@@ -13,6 +13,7 @@ Download the slides [here](https://github.com/nvolkova/btm-2016/blob/master/RM-s
 ```r
 install.packages("rmarkdown")
 ```
+
 ###Excercises:
 - [1. Simple syntax and code chunks](https://github.com/nvolkova/btm-2016/blob/master/RM-excecises/ex1.Rmd?raw=TRUE)
 - [2. Plotting, caching and formatting](https://github.com/nvolkova/btm-2016/blob/master/RM-excecises/ex2.Rmd?raw=TRUE)
@@ -37,16 +38,10 @@ Use the following installation steps:
 - Install the version of Anaconda which you downloaded, following the instructions on the download page.
 
 If you are an experienced Python user, you may wish to install Jupyter using Python’s package manager, pip, instead of Anaconda:
-- Update your pip:
-```r
-pip3 install --upgrade pip
-```
-- Then install the Jupyter Notebook using:
-```r
-pip3 install jupyter
-```
+- Update your pip: `pip3 install --upgrade pip`
+- Then install the Jupyter Notebook using: `pip3 install jupyter`
 To run the notebook:
-```r
+```
 jupyter notebook
 ```
 ###Excercises:
