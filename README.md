@@ -40,6 +40,7 @@ Use the following installation steps:
 If you are an experienced Python user, you may wish to install Jupyter using Python’s package manager, pip, instead of Anaconda:
 - Update your pip: `pip3 install --upgrade pip`
 - Then install the Jupyter Notebook using: `pip3 install jupyter`
+
 To run the notebook:
 ```
 jupyter notebook
