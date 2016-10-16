@@ -1,0 +1,42 @@
+---
+title: "My awesome Rmarkdown presentation"
+author: "EMBL predocs"
+date: October 20, 2016
+output: ioslides_presentation
+---
+
+# In the morning
+
+## Getting up
+
+- Turn off alarm
+- Get out of bed
+- Show an image
+![EMBL logo](http://www.embl.de/layout/images/external/common/embl_logo.png)
+
+
+## Breakfast
+
+- Eat eggs
+- Drink coffee
+- Run some code
+```{r, fig.height=4, echo=FALSE, dev.args = list(bg = 'transparent')}
+# Set plot layout to one row, two columns
+par(mfrow=c(1,2))
+plot(1:10, main="My scatterplot")
+barplot(1:10, main="My barplot")
+```
+
+
+# In the evening
+
+## Dinner
+
+- Eat spaghetti
+- Drink wine
+
+
+## Going to sleep
+
+- Get in bed
+- Count sheep
