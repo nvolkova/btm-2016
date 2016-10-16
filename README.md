@@ -15,7 +15,7 @@ Materials for Basic Teaching Module in EMBL Predoc Course 2016
 
 ##R Markdown
 
-[Download the slides](https://github.com/nvolkova/btm-2016/blob/master/RM-slides.pdf).
+[Download the slides](https://github.com/nvolkova/btm-2016/blob/master/RM-slides.html).
 
 [Download rmarkdown cheatsheet](https://github.com/nvolkova/btm-2016/blob/master/rmarkdown-cheatsheet.pdf?raw=TRUE)
 
