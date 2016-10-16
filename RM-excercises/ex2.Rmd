@@ -1,0 +1,46 @@
+---
+title: "Excercise 2"
+author: "Your name"
+date: "20 October 2016"
+output: html_document
+---
+
+
+
+You can add a name for your chunk after the "r" symbol like this. Note: you shouldn't have two chunks with the same name!
+```{r chunk_name}
+paste("Hello world")
+```
+
+
+You can set figure widths and heights, either together or separately. 
+```{r fig.width=5, fig.height=6}
+plot(1:10, main="My scatterplot")
+```
+
+You can also align the figure to the `centre`, `left` or `right`
+```{r fig.width=3, fig.align="right"}
+plot(1:10, main="My scatterplot")
+```
+
+By default the resolution of your produced image is `75`. You can change this using the `dpi` option. See the difference between both plots below. 
+```{r dpi=10, out.width="700px"}
+plot(1:10, main="My scatterplot")
+```
+
+```{r dpi=150, out.width="700px"}
+plot(1:10, main="My scatterplot")
+```
+
+Figures aren't saved to file by default. To save figures in a chunk to file set the `fig.path` to the directory to save the path. 
+
+```{r figure_chunk, fig.path='chunk_figures/'}
+plot(1:10, main="My scatterplot")
+barplot(1:10, main="My barplot")
+```
+
+If you set this to `./` the figures will be saved to the directory containing the `.Rnw` file.
+
+```{r figure_chunk_2, fig.path='./'}
+plot(1:10, main="My scatterplot")
+```
