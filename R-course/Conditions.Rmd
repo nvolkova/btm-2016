@@ -9,7 +9,7 @@ output: html_document
 options(width = 110)
 ```
 
-# `if` и `else`
+# `if` and `else`
 
 Decision making is an important part of programming. This can be achieved in R programming using the conditional __if...else__ statement.
 
