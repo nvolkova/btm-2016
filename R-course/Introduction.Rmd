@@ -1,0 +1,143 @@
+---
+title: "Another introduction"
+author: "Nadezda Volkova, Jack Monahan"
+date: "BTM 2016"
+output: html_document
+---
+  
+```{r setup, echo=FALSE}
+options(width = 110)
+```
+
+# What to do if nothing works
+
+>- Calm down, it is fine
+>- Read thoroughly all the error and warnings messages
+>- Check out help page: `help("sin")`, `help.search("logarithm")`
+>- R-FAQ: https://cran.r-project.org/doc/FAQ/R-FAQ.html
+>- Use Google!
+>- R Mailing List Archive
+>- stackoverflow.com
+
+  
+# Global environment
+  
+>- Every variable exists in its _environment_
+>- Variable's environment - a space where you can find it
+>- All the variable you create in console go to _global environment_
+>- You can see these variables if you click "Environment" in RStudio
+
+```{r}
+ls()
+```
+
+# Functions
+
+R has a lot of built-in functions, i.e. `rnorm`:
+
+```{r}
+?rnorm
+```
+
+```{r}
+rnorm(15)
+```
+
+You can list arguments by names:
+
+```{r}
+rnorm(15, mean = 5, sd = 3)
+```
+
+# Writing functions
+
+Main word - `function`: then _arguments_ in parentheses, and _body_ in curved brackets.
+
+```{r}
+returntwo <- function() { 
+  y <- 2
+  return(y)
+}
+
+returntwo()
+```
+
+# Function environment
+
+If a variable exists only within a function - you can not call it from outside:
+
+```{r}
+addten <- function(x) { 
+  x <- x + 10
+}
+
+addten(1)
+ls()
+```
+
+A function can alter the variable it is applied to:
+
+```{r}
+addten <- function(x) { 
+  x <- x + 10
+}
+
+cats <- 1
+addten(cats)
+cats # notice that only this string goes to the output
+```
+
+Or just print some transformation of this variable:
+
+```{r}
+addten <- function(x) { 
+  return(x + 10)
+}
+
+morecats <- addten(cats)
+print(c(cats,morecats))
+```
+
+# Function environment
+
+There is also a global assignment operator `<<-` in case you really need to alter some global variable inside a function.
+
+```{r}
+addten <- function(x) { 
+  moredogs <<- x + 10
+}
+
+dogs <- 1
+addten(dogs)
+dogs
+moredogs
+```
+
+>- This is called a function with a _side effect_
+>- But that's not a very good thing to do
+
+# Removing variables from environment
+
+Check what variables do you have:
+
+```{r}
+ls()
+```
+
+And simply remove the ones you do not need:
+
+```{r}
+rm(dogs)
+rm(moredogs)
+ls()
+```
+
+Or delete everything!
+
+```{r}
+rm(list = ls())
+ls()
+```
+
+But be careful when removing variables!
+  
