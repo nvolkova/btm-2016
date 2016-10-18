@@ -1,6 +1,6 @@
 ---
-title: "Another introduction"
-author: "Nadezda Volkova, Jack Monahan"
+title: "Basic R course"
+author: "Nadezda Volkova, Daniel Elias Martin Herranz, Jack Monahan"
 date: "BTM 2016"
 output: html_document
 ---
@@ -9,7 +9,9 @@ output: html_document
 options(width = 110)
 ```
 
-# What to do if nothing works
+# 1. Alternative introduction.
+
+## What to do if nothing works
 
 >- Calm down, it is fine
 >- Read thoroughly all the error and warnings messages
@@ -20,7 +22,7 @@ options(width = 110)
 >- stackoverflow.com
 
   
-# Global environment
+## Global environment
   
 >- Every variable exists in its _environment_
 >- Variable's environment - a space where you can find it
@@ -31,9 +33,9 @@ options(width = 110)
 ls()
 ```
 
-# Functions
+## Functions
 
-R has a lot of built-in functions, i.e. `rnorm`:
+R has a lot of built-in functions, i.e. `rnorm` (which returns a given number of values of a normally distributed random variable):
 
 ```{r}
 ?rnorm
@@ -49,7 +51,7 @@ You can list arguments by names:
 rnorm(15, mean = 5, sd = 3)
 ```
 
-# Writing functions
+## Writing functions
 
 Main word - `function`: then _arguments_ in parentheses, and _body_ in curved brackets.
 
@@ -62,7 +64,7 @@ returntwo <- function() {
 returntwo()
 ```
 
-# Function environment
+## Function environment
 
 If a variable exists only within a function - you can not call it from outside:
 
@@ -87,7 +89,7 @@ addten(cats)
 cats # notice that only this string goes to the output
 ```
 
-Or just print some transformation of this variable:
+Or just return some transformation of this variable:
 
 ```{r}
 addten <- function(x) { 
@@ -116,7 +118,7 @@ moredogs
 >- This is called a function with a _side effect_
 >- But that's not a very good thing to do
 
-# Removing variables from environment
+## Removing variables from environment
 
 Check what variables do you have:
 
@@ -140,4 +142,1292 @@ ls()
 ```
 
 But be careful when removing variables!
-  
+
+
+# 2. Packages
+
+
+>- R was created to be extendable - it is based on _packages_
+>- The core of the language -- `base` package
+>- There are several other packages uploaded with `base` by default, others can be called without installation
+>- Don't mix up `package` and `library`!
+>- Again: extension modules in R are called packages.
+>- Library (in R ecosystem) - place on the disk where all available packages are stored.
+
+Check out where your packages are stored:
+
+```{r}
+.libPaths()
+```
+
+## Where to get packages
+
+>- CRAN: https://cran.r-project.org/
+>- github, bitbucket
+
+With this command you can check what packages you have already installed:
+
+```{r, eval=FALSE}
+installed.packages()
+```
+
+```{r, echo = FALSE}
+i <- as.data.frame(installed.packages())
+i <- na.omit(i[, c("Package", "Priority")])
+i[i$Priority == "base", ]
+```
+
+## Loading packages
+
+>- `library(pkgname)`: write package name without quotes
+>- Instead of `library(pkgname)` you can use `require(pkgname)`
+
+## Installing packages from CRAN
+
+This is how you install any package from CRAN, in this case "xts" package:
+
+```{r, eval=FALSE}
+install.packages("xts", dependencies = TRUE)
+```
+
+If you call `library()` for a package you did not install, you will get an error.
+
+```{r, message=F, warning=F, eval=F}
+library(xts)
+```
+
+It is nice to update packages from time to time: `update.packages()`
+
+Another very useful function if something is not working as planned: `sessionInfo()`
+
+```{r, echo=FALSE}
+sessionInfo()
+```
+
+## Bonus: installation from BioConductor
+
+As you may want to install stuff from [http://bioconductor.org]() as well, use this code:
+
+```{r, eval=FALSE}
+## try http:// if https:// URLs are not supported
+source("https://bioconductor.org/biocLite.R")
+biocLite( <package you want to istall> )
+```
+
+
+
+# 3. Vectors, lists and matrices
+
+## What is a vector
+>- Vector - basic unit of data structure in R
+>- More complex structures such as matrix, data frame, factor and lists are based on vectors
+>- Remember the word 'vectorisation' - that's the main concept
+
+. . .
+
+$$   
+\begin{align}
+  f: 
+  \begin{bmatrix}
+    x_{1} \\
+    x_{2} \\
+    \vdots \\
+    x_{m}
+  \end{bmatrix} 
+  \longrightarrow
+  \begin{bmatrix}
+    f(x_{1}) \\
+    f(x_{2}) \\
+    \vdots \\
+    f(x_{m})
+  \end{bmatrix} 
+\end{align}
+$$
+
+## Vector
+>- Vector is an indexed set of objects of the same type
+>- R does not differentiate scalar (of length 1) and vector objects
+>- Vector element enumeration starts with 1 (not 0!)
+>- To create a vector, you can use a function `vector`
+
+```{r}
+x <- vector(length = 2)
+x[1] <- 5
+x[2] <- 8
+x
+```
+
+## Vector making: function `c`
+
+Instead of elementwise assignment, you can do it with a more compact notation:
+```{r}
+x <- c(5, 8)
+x
+```
+
+Function `c` can be nestes and take variables:
+```{r}
+y <- c(x, 1, c(3, 4), x, NA)
+y
+```
+
+## Vector making: operator `:`
+
+If you need to make a sequence of number with step 1:
+```{r}
+5:9
+3:-1
+```
+
+## Vector making: function `seq`
+
+Used to make more sophisticated sequences:
+```{r}
+seq(1, 2, by = 0.25)
+```
+
+```{r}
+seq(3, 4, length.out = 5)
+```
+
+```{r}
+seq(3, 4, length = 5)
+```
+
+## Vector making: function  `rep`
+
+If you want to make a vector by repeating something:
+```{r}
+rep(1:3, times = 3)
+```
+
+```{r}
+rep(1:3, each = 4)
+```
+
+```{r}
+rep(1:3, length.out = 5)
+```
+
+## Types of vectors
+>- Atomic vectors: all elements are of the same type
+>- Main types:
+
+  1. logical (TRUE/FALSE)
+  2. integer
+  3. numeric/double 
+  4. complex
+  5. character
+  6. raw
+
+## Types of vectors
+
+If you would like to know what types does a vector have, use functions `typeof` and `is.*` (where `*` means any particular type)
+
+```{r}
+a <- c("Tree", "Flower", "Bird")
+typeof(a)
+```
+
+```{r}
+is.character(a)
+is.logical(a)
+```
+
+## Type convertion
+
+Use `as.*` to force a vector to turn into another type:
+```{r}
+b <- "123.25"
+as.numeric(b)
+```
+
+```{r}
+as.integer(b)
+```
+
+## Length of a vector: `length`
+
+Every vector has a length:
+```{r}
+x <- 1:100
+length(x)
+```
+
+It is determined automatically, but you can change it:
+```{r}
+length(x) <- 4; x
+```
+
+```{r}
+length(x) <- 7; x
+```
+
+## Named vectors
+
+Vector elements can be named:
+```{r}
+a <- c(uno = 1, dos = 2, "universal answer" = 42, 99)
+names(a)
+```
+
+```{r}
+names(a) <- c("one", "two", "forty two", "ninety nine")
+a
+```
+
+```{r}
+#names(a) <- NULL
+```
+
+## Vector arithmetics
+
+Arithmetic operators are _vectorized_ by default (are applied elementwise):
+```{r}
+1:3 + c(-1, 2, 0)
+```
+
+```{r}
+1:3 * c(-1, 2, 0)
+```
+
+```{r}
+c(TRUE, TRUE, TRUE) & c(0, 1, 999)
+```
+
+## Vectorization
+
+Many functions in R have a built-in vectorization support:
+```{r}
+# vectorized
+sqrt(1:4)
+```
+
+```{r}
+# vectorized
+floor(seq(0, 3, by = 0.25))
+```
+
+```{r}
+# not vectorized
+sum(1:100)
+```
+
+## Recycling
+
+How does the arithmetics work on vectors of different length?
+
+1. Length of the results is equal to the length of the bigger vector
+
+2. Smaller vector is recycled several times so that the length of overwritten vector equals the length of the bigger vector.
+
+3. If the length of the bigger vector is not divisible by the length of smaller, you will get a warning
+
+```{r, eval = FALSE}
+1:5 + 0:1
+# recycling in action: (1, 2, 3, 4, 5) + (0, 1, 0, 1, 0) => (1, 3, 3, 5, 5)
+```
+
+```{r, echo = FALSE}
+1:5 + 0:1
+```
+
+Why do we need it?
+
+```{r}
+1:10 + 3
+```
+
+```{r}
+(5:8) ^ 2 
+```
+
+```{r}
+1:4 >= 3
+```
+
+## Accessing vector elements
+
+Let's take a simple vector:
+```{r}
+x <- seq(10, 100, by = 10)
+```
+
+Reading and writing of vector elements is done by using the operator `[`:
+```{r, eval = FALSE}
+x[ind]
+val <- x[ind]
+x[ind] <- val
+```
+
+Trivial case:
+```{r}
+x[]
+```
+
+## Positive indices
+
+```{r}
+x[1]
+```
+
+```{r}
+x[3:4]
+```
+
+```{r}
+x[c(8, 7, 3, 6:8, x[1])]
+```
+
+## Negative indices
+
+It means "All elements except for these":
+
+```{r}
+x[-5]
+```
+
+```{r}
+x[-(2:6)]
+```
+
+```{r}
+x[c(-3, -5, -length(x), -5)]
+```
+
+## Logical indices
+
+Equals "Elements whose corresponding value is TRUE":
+```{r}
+x[rep(c(TRUE, FALSE), 5)]
+```
+
+```{r}
+x[c(TRUE, FALSE)]
+```
+
+```{r}
+x[x > 77 & x < 99]
+```
+
+## Indexing via names
+
+For names vectors, you can use the dollowing construct:
+```{r}
+a[c("two", "one", "forty two")]
+```
+
+```{r}
+a[c("forty two", "forty three", "forty four")]
+```
+
+## Functions `all` and `any`
+
+```{r}
+all(x < 200); all(x > 20)
+```
+
+```{r}
+any(x > 150); any(x < 15)
+```
+
+## Function `which`
+
+```{r}
+which(x >= 50)
+```
+
+```{r}
+which.min(x)
+which.max(x)
+```
+
+# Matrix
+
+>- Matrix is a 2-dimensional array of data of the same type
+>- There is a function `matrix`
+
+```{r}
+matrix(1:6, nrow = 2, ncol = 3)
+```
+
+# Matrix making
+
+You can shorten the notation without loosing any information:
+
+```{r}
+matrix(1:6, nrow = 2)
+```
+
+```{r}
+matrix(1:6, nrow = 2, byrow = TRUE)
+```
+
+```{r}
+matrix(7:8, nrow = 2, ncol = 5)
+```
+
+## Attribute `dim`
+
+With this attribute (feature of an object) you can assess the dimensionality of your matrix:
+
+```{r}
+m <- matrix(1:6, ncol = 3)
+dim(m)
+c(nrow(m), ncol(m))
+```
+
+```{r}
+dim(m) <- NULL; m 
+dim(m) <- c(2, 3); m
+```
+
+## Arithmetic operators
+
+All arithmetic operations process matrices elementwise:
+
+```{r}
+m1 <- matrix(1:4, nrow = 2) 
+m2 <- matrix(c(1, 2, 2, 3), nrow = 2)
+```
+
+```{r}
+m1 + m2
+m1 + 5
+```
+
+```{r}
+m1 * 2
+m1 * m2
+```
+
+Linear algebra operations like matrix product should be written in `% %`:
+```{r}
+m1 %*% m2
+```
+
+## Indexing of matrices
+
+Rules are the same as for vectors, but now we have 2 dimensions:
+
+```{r}
+m <- matrix(1:10, ncol = 5)
+m[1, 3]
+```
+
+```{r}
+m[2, ]
+m[, 4]
+```
+
+```{r}
+m[1, ] <- 0; m
+```
+
+```{r}
+m[, -5] <- 11:18; m
+```
+
+# Collapsing dimensions
+
+If you want to access a particular part of a matrix, you just treat it as a vector of rows and vector of columns:
+
+```{r}
+m <- matrix(1:10, ncol = 5)
+ind <- c(1, 3, 5)
+m[, ind]
+```
+
+```{r}
+ind <- 3
+m[, ind]
+```
+
+```{r}
+m[, ind, drop = FALSE]
+```
+
+## Named matrices: `rownames`/`colnames`
+
+If columns and rows of a matrix are named, they can also be called using these names:
+
+```{r}
+m <- matrix(1:10, ncol = 5)
+rownames(m) <- c("row1", "row2")
+colnames(m) <- paste0("column", 1:5)
+```
+
+```{r}
+m
+```
+
+```{r}
+m["row1", c("column2", "column4"), drop = F]
+```
+
+## Joining matrices: `rbind`/`cbind`
+
+You can put two matrices together by joining their columns (`cbind`) or rows (`rbind`):
+
+```{r}
+rbind(m1, m2)
+```
+
+```{r}
+cbind(m1, m2)
+```
+
+```{r}
+cbind(m1, m2, 1:2, c(5, 3), m2[, 1], m1 * 3, cbind(m2, m1))
+```
+
+## `apply`
+
+R has a very convenient way of applying functions to matrices. Let's define a matrix and a function we would like to apply.
+
+```{r}
+m <- matrix(1:25, 5)
+f <- function(x) sum(x^2)
+```
+
+`apply` has 3 arguments: 
+
+>- Array (matrix)
+>- Index (1 -- row-wise, 2 -- column-wise)
+>- Function
+
+```{r}
+apply(m, 1, f)
+apply(m, 2, f)
+```
+
+```{r}
+apply(m, 1:2, function(i) if (i>13) i else 13)
+```
+
+```{r}
+m[m <= 13] <- 13; m
+```
+
+Such a function without name is called _anonymous_.
+
+## `rowSums`, `rowMeans`, `colSums`, `colMeans`
+
+The most common row-wise and column-wise operations are `sum` и `mean`:
+```{r}
+m <- matrix(1:25, 5)
+rowSums(m)
+```
+
+Let's doublecheck that they actually work this way:
+```{r}
+all.equal(rowSums(m), apply(m, 1, sum))
+all.equal(colMeans(m), apply(m, 2, mean))
+```
+
+## Lists
+
+>- List is an indexed structure
+>- List can consist of arbitrary objects
+>- Usually used to store data of different length or different types
+>- Function `list` creates a list
+
+```{r}
+list(1:5, "my_data", matrix(0, 2, 2))
+```
+
+```{r}
+list(a = 1, b = 1:3, "1to5" = 1:5, 42)
+```
+
+A list can be recursive:
+
+```{r, eval = FALSE}
+list(a = list(1, 2, 3), b = list(list(4), 5, 6))
+```
+
+You can concatenate multiple lists into a new one:
+
+```{r}
+l1 <- list(name = "john", salary = 1000)
+l2 <- list(has_car = TRUE, car = "lamborghini")
+```
+
+```{r}
+c(l1, l2)
+```
+
+Every vector can be easily converted into a list:
+
+```{r}
+v <- 1:7
+list(v)
+```
+
+But not the other way round! In cases when it makes sense, you can use `unlist` to make a vector out of list:
+
+```{r}
+l <- list(1:3, 4:5, last = 6)
+unlist(l)
+```
+
+```{r}
+unlist(c(l, "spy!"))
+```
+
+There are several ways to access elements of a list.
+
+First method: as for vectors, `[]`
+    + indexing according to vector rules
+    + result is a sublist
+    
+```{r}
+l[3:2]; l[-(1:2)]
+```
+
+```{r}
+l[c(F, T, F)]; l["last"]
+```
+
+Second method: accessing a particular element, `[[]]`
+    + (scalar) number of element or its full name
+    + result is an element of the list
+
+```{r}
+l[[1]]
+l[["last"]]
+```
+
+Third method: calling an element of a names list using its name, `$`
+    + enough to use partial name of an element
+    + results is an element of the list
+    
+```{r}
+l$last
+```
+
+```{r}
+l$l #l$la; l$las
+```
+    
+## Replacing and adding elements to the list
+
+```{r}
+l <- list(1:3, 4:5, last = 6)
+l[[3]] <- NULL; l
+```
+
+```{r}
+l[[4]] <- 99; l
+```
+
+```{r}
+l <- list(vec = 1:7, fun = sqrt) 
+names(l)
+is.null(l$string)
+```
+
+```{r}
+l$string <- "Citius, altius, fortius"
+l
+```
+    
+    
+## Applying functions to a list: `lapply` 
+
+R also has a special function to apply functions to all elements of a list. Result will also be a list.
+
+```{r}
+l <- list(a = c("12", "34"), b = LETTERS[5:10], c = 1:5)
+```
+
+```{r}
+lapply(l, length)
+```
+
+```{r}
+lapply(l, paste, collapse = "|")
+#lapply(l, function(s) paste(s, collapse = "|"))
+```
+
+There is also a function `sapply` that can be applied to a list or vector and returns a vector (when possible).
+
+```{r}
+sapply(l, paste, collapse = "|")
+```
+
+
+
+# 4. `if` и `else`
+
+Decision making is an important part of programming. This can be achieved in R programming using the conditional __if...else__ statement.
+
+```{r, eval=FALSE}
+if (<condition>) {<do something>} else {<do another thing>}
+```
+
+>- Here \<condition\> is an expression that results in logical vector of length 1 (`TRUE` or `FALSE`, `NA` will produce an error)
+>- \<do something\> and \<do another thing\> -- arbitrary commands
+
+Check out this:
+
+```{r}
+if (sqrt(2) > 1.5) {
+  print("Greater!")
+} else {
+  print("Less!")
+}
+```
+
+NB: do not transfer `else` on a new string!
+
+The above conditional can also be written in a single line as follows.
+
+```{r, echo=FALSE}
+if (sqrt(2) > 1.5) print("Greater!") else print("Less!")
+```
+
+## Nested __if...else__ statement
+
+We can nest as many __if...else__ statement as we want as follows.
+
+Syntax of nested if...else statement:
+
+```{r, eval=FALSE}
+if ( test_expression1) {
+   statement1
+} else if ( test_expression2) {
+   statement2
+} else if ( test_expression3) {
+   statement3
+} else
+   statement4
+```
+
+Only one statement will get executed depending upon the test_expressions.
+
+```{r}
+x <- 0
+if (x < 0) {
+   print("Negative number")
+} else if (x > 0) {
+   print("Positive number")
+} else
+   print("Zero")
+```
+
+## `ifelse`
+
+If you want to avoid all the hassle with if and else and calling different variables, there is a solution!
+
+```{r}
+if (c(TRUE, FALSE)) print("Hmm...?")
+```
+
+__ifelse__ returns a value with the same shape as test which is filled with elements selected from either yes or no depending on whether the element of test is TRUE or FALSE.
+
+```{r}
+ifelse(runif(8) > 0.5, "Heads", "Tails")
+```
+
+In other words, you write `ifelse( <yes/no> , <yes-action>, <no-action>)` if you need a response of the same length as condition. You can also put as many `ifelse` inside each other as you want.
+
+```{r}
+x <- runif(8)
+ifelse(x > 2/3, "Rock", 
+       ifelse(x > 1/3, "Scissors", "Paper"))
+```
+
+## Multiple choice: `switch`
+
+There is a function __switch(EXPR, alternatives)__ that evaluates EXPR and respectively chooses one of further arguments as a response.
+
+```{r}
+switch("factorial", 
+       sum = 5 + 5,
+       product = 5 * 5,
+       factorial = factorial(5), 
+       0)
+```
+
+There is not so many cases where you could use it, but it's nice to know just in case.
+
+## Loops
+
+### `repeat`
+
+When to use: when you want to run a loop forever and break it on your own will:
+
+```{r}
+i <- 0
+repeat {
+  i <- i + runif(1)
+  print(i)
+  if (i > 5) break
+}
+```
+
+### `while`
+
+When to use: when you want something to be happening as long as some condition is satisfied
+
+```{r}
+i <- 2^14
+while (i > 1000) {
+  i <- i/2
+  print(i)
+}
+```
+
+### `for`
+
+When to use: when you are using some index that runs in pre-determined interval
+
+```{r}
+for (i in 1:8) {
+  if (i %% 2 == 0) print(i)
+}
+```
+
+Index is not necessarily integer:
+
+```{r}
+for (i in letters) {
+  if (i == "b") next
+  if (i == "d") break
+  print(i)
+}
+```
+
+**NB**: If you want to print something inside a loop, you have to call function `print`! Otherwise nothing happens:
+
+```{r}
+for (i in 1:5) i
+```
+
+### `for` vs vectorization
+
+Somethimes running things in for-loop is time-comsuming (at least a little bit).
+
+```{r, cache=TRUE}
+v <- 1:1e5
+system.time({
+  x <- 0
+  for (i in v) x[i] <- sqrt(v[i])
+})
+```
+
+So why not using R's ability to perform vector calculations?
+
+```{r}
+system.time({
+  y <- sqrt(v)
+})
+identical(x, y)
+```
+
+
+
+
+# 5. Data frames, reading data in R
+
+# Data frame
+
+>- Data frame -- 2-dimensional table with data (Excel spreadsheet, SQL-таблица)
+>- De facto it is standard way of data storage as "observations/variables": <br> rows are associated with observations, columns -- with variables
+
+Places        N\_coord     E\_coord           Date     Temp
+-------      ---------    ---------     ----------   ------
+MM Faculty       59.88        29.83     07.01.2014      -15
+PP Fortress      59.95        30.32     15.05.2013       17
+SPbU main        59.94        30.3      22.06.2013       22
+MM Faculty       59.88        29.83     09.01.2014      -21
+...                ...          ...            ...      ...
+
+data frame inherited properties of matrices (rectangular shape) and lists (variables can have different types).
+
+# Creating data frames
+
+```{r}
+df <- data.frame(x = 1:4, y = LETTERS[1:4], z = c(T, F))
+df
+```
+
+Function `str` -- сводка об объекте:
+```{r}
+str(df)
+```
+
+# Имена
+
+. . .
+
+```{r}
+df <- data.frame(x = 1:4, y = LETTERS[1:4], z = c(T, F), 
+                 row.names = c("Alpha", "Bravo", "Charlie", "Delta"))
+df
+```
+
+. . .
+
+```{r}
+rownames(df); colnames(df) #dimnames(df)
+```
+
+# Размерности
+
+. . .
+
+```{r}
+nrow(df); ncol(df) #dim(df)
+```
+
+. . .
+
+Две важные особенности:
+
+>- &zwnj; `length(df)` возвращает количество _столбцов_ (переменных), а не общее количество элементов
+>- &zwnj; `names(df)` также возвращает имена столбцов 
+
+. . .
+
+```{r}
+length(df); names(df)
+```
+
+# Индексация data frame
+
+. . .
+
+Как для матрицы:
+
+```{r}
+df[3:4, -1]
+```
+
+. . .
+
+```{r}
+df[c(F, T), c("z", "x")]
+```
+
+# Индексация data frame
+
+. . .
+
+```{r}
+df[, 1]; df[, 1, drop = FALSE]
+```
+
+. . .
+
+Как для списка:
+
+```{r}
+df$z #df[[3]]; df[["z"]]
+```
+
+# Фильтрация по условию
+
+. . .
+
+```{r}
+df[df$x > 2, ]
+```
+
+. . .
+
+```{r}
+subset(df, x > 2)
+```
+
+. . .
+
+```{r}
+subset(df, x > 2, select = c(x, z))
+```
+
+# Комбинирование data frame
+
+. . . 
+
+Функции `rbind`/`cbind` работают как для матриц:
+
+```{r}
+rbind(df, data.frame(x = 5:6, y = c("K", "Z"), z = TRUE, row.names = c("Kappa", "Zulu")))
+```
+
+. . .
+
+```{r}
+cbind(df, data.frame(season = c("Summer", "Autumn", "Winter", "Spring"), temp = c(20, 5, -10, 5)))
+```
+
+# Комбинирование data frame: `merge`
+
+. . .
+
+```{r}
+df
+```
+
+. . .
+
+```{r}
+df_salary <- data.frame(x = c(3, 2, 6, 1), salary = c(100, 1000, 300, 500))
+merge(df, df_salary, by = "x")
+```
+
+. . . 
+
+Для тех, кто знаком с SQL: это inner join. 
+
+Остальные типы (left, right, outer, cross join) легко найти на stackoverflow по запросу "r joins".
+
+# Импорт данных
+
+>- Из файла:
+    + Comma separated values (.csv), tab separated values
+    + Неструктурированный текст -- `readLines`, `scan`
+    + XML, HTML -- `library(XML)`, `library(httr)`, ...
+    + JSON, YAML -- `library(rjson)`, `library(RJSONIO)`, ...
+    + Excel -- `library(XLConnect)`, `library(readxl)`
+    + SAS, Stata, SPSS, MATLAB -- `library(foreign)`, `library(sas7bdat)`
+>- Web -- `library(rvest)`
+>- Базы данных:
+    + Реляционные -- `library(DBI)`, `library(RSQLite)`, ...
+    + Нереляционные -- `library(rmongodb)`, ...
+>- ...
+
+# Чтение табличных данных
+
+Основной инструмент: `read.table`
+
+>- `file` -- имя файла
+>- `header` -- наличие или отсутствие заголовка в первой строке
+>- `sep` -- разделитель значений, `dec` -- десятичная точка
+>- `quote` -- символы, обозначающие кавычки (для строкового типа)
+>- `na.strings` -- строки, кодирующие пропущенное значение
+>- `colClasses` -- типы столбцов (для быстродействия и указания типа: строка-фактор-дата/время)
+>- `comment.char` -- символ, обозначающий комментарий
+>- `skip` -- количество строк пропускаемых c начала файла
+
+. . .
+
+Функции `read.csv`, `read.csv2`, `read.delim` и `read.delim2` 
+суть оболочки над `read.table` с расставленными умолчаниями
+
+# Типичные этапы (пред)обработки данных
+
+>- Импорт в дата фрейм
+>- Очистка значений, проверка типов
+>- Работа со строками: имена, переменные строкового типа, факторы
+>- Пропущенные значения: идентификация, способ обработки
+>- Манипулирование переменными: преобразование, создание, удаление
+>- Подсчёт описательных статистик: split-apply-combine
+>- Визуализация данных
+>- Экспорт
+
+# Очистка значений, проверка типов
+
+Типы переменных, на которых легко ошибиться при импорте:
+
+>- Числовые типы становятся строковыми
+    + из-за пропущенных значений, отмеченных не как `NA`
+      `na.strings = c("NA", "Not Available", "Missing")`
+    + из-за неверно указанных разделителя, десятичного знака <br>
+      `sep = ","`, `dec = "."`
+    + из-за кавычек, сопроводительного текста или комментариев <br>
+      `quote`, `comment.char`, `skip`
+>- Строковые типы становятся факторами либо наоборот <br>
+   `as.character`, `as.factor`
+>- Тип "дата/время" остаётся строковым
+   `as.POSIXct`, `as.POSIXlt`, `as.Date`
+   
+. . . 
+
+Функции `str`, `summary`, `head` и `tail` помогут определить, всё ли в порядке
+
+
+# Работа с переменными
+
+>- Функции `complete.cases` и `na.omit` для удаления наблюдений с пропущенными значениями: <br>
+   `df[complete.cases(df), ]` либо `na.omit(df)`
+>- Замена NA на некоторые значения может быть потенциально опасной
+    + заполнение средним может вносить смещение в данные
+    + заполнение нулями в большинстве случаев вообще некорректно!
+>- Создание, изменение и удаление переменных выполняется конструкциями <br>
+    `df$new_var <- <...>`, <br>
+    `df$old_var <- f(df$old_var)`, <br>
+    `df$old_var <- NULL`
+>- Кроме того, для работы сразу с большим количеством переменных есть функция `within`
+
+## Export
+
+>- `write.table`, `write.csv` and `write.csv2` -- almost identical to import functions
+>- If an array is big enough, it;s better to separate the pre-processing step
+    + in a separate ".R" file
+    + write the preprocessed ("clean") data in a separate file
+
+
+McNew, L. B. and C. M. Handel. 2015. 
+Evaluating species richness: biased ecological inference results 
+from spatial heterogeneity in species detection probabilities. 
+Ecological Applications 25:1669-1680. doi:10.1890/14-1248.1
+
+Ссылка на данные: [http://alaska.usgs.gov/products/data.php?dataid=5](http://alaska.usgs.gov/products/data.php?dataid=5) либо [https://github.com/tonytonov/Rcourse/blob/master/avianHabitat.csv](https://github.com/tonytonov/Rcourse/blob/master/avianHabitat.csv)
+
+
+
+# 6. Strings
+
+>- String is an element of a vector of type `character`
+>- Most of the functions operating with strings are vectorized
+
+```{r}
+s <- c("Trump and republicans!", 
+       "Clinton and democrates?",
+       'Against all.')
+```
+
+```{r, echo=FALSE}
+#s <- enc2utf8(s)
+```
+
+>- Usually you would use quotation marks to designate a string
+>- But ' ' also work: `'"Smart" watch'`
+
+```{r, echo=FALSE}
+'"Smart" watch'
+```
+
+## Functions `paste`/`paste0`
+
+>- This functions perform concatenation of string vectors with respect to rewriting rules
+>- Argument `sep` -- separator between elements (by default, for `paste` it is space, for `paste0` -- empty line)
+>- Argument `collapse` -- "collapses" vector into one string
+
+```{r}
+paste(c("Beautiful", "Dirty"), "Rich")
+```
+
+```{r}
+paste(c("Beautiful", "Dirty"), "Rich", sep = "_")
+```
+
+```{r}
+paste(c("Beautiful", "Dirty"), "Rich", collapse = ", and")
+```
+
+## Function `strsplit`
+
+>- Splits a string vector
+>- **NB**: The result is a list!
+
+```{r}
+strsplit(s, " и ", fixed = TRUE)
+```
+
+
+If you do not put the argument `fixed` (by default `fixed = FALSE`), the string which you want to split will be considered a regular expression:
+
+```{r}
+strsplit(s, "[[:punct:]]")
+```
+
+## Regular expressions
+
+>- "Metalanguage" of search and substring manipulation
+>- The search template can include usual symbols and so-called _wildcards_
+
+```{r}
+grep("Trump", s)
+```
+
+```{r}
+grepl("Trump", s)
+```
+
+```{r}
+gsub("\\b[[:alpha:]]{4,5}\\b", "####",  s)
+```
+
+## Package `stringr`
+
+Installation:
+```{r}
+#install.packages("stringr")
+library(stringr)
+```
+
+This package contains a plenty of functions for string processing. All these functions are vectorized and consistent:
+
+```{r}
+str_extract(s, "")
+```
+
+```{r}
+str_replace(s, "[all]", "?")
+```
+
+You can add `_all` to most of the functions to find all the occurences and not only the first one:
+
+```{r}
+str_extract_all(s, "m")
+```
+
+```{r}
+str_replace_all(s, "[all]", "?")
+```
+
+## Functions `tolower`/`toupper`
+
+Case manipulation:
+```{r}
+tolower(month.name)
+```
+
+```{r}
+toupper(month.abb)
+```
+
+## Filepaths
+
+An R session always has a _working directory_:
+```{r}
+getwd() 
+head(list.files())
+list.dirs("..", recursive = FALSE)
+```
+
+>- Use the function `setwd` to change working directory.
+>- When you create a new project in RStudio, the working directory is the folder where project file `.Rproj` is located.
+>- Catalogues separators in Windows: either `/`, or `\\`
+
+## Number formatting
+
+```{r}
+c(pi, exp(pi))
+```
+
+```{r}
+formatC(c(pi, exp(pi)), digits = 3)
+```
+
+```{r}
+formatC(c(pi, exp(pi)), digits = 3, format = "e")
+```
+
+## Function `cat`
+
+>- Usually the function `print` is used for output
+>- Function `cat` can print the objects "as they are"
+
+```{r}
+print('"Smart" watch'); cat('"Smart" watch')
+```
+
+```{r}
+print("Harry\tRon\nHermione"); cat("Harry\tRon\nHermione")
+```
+
