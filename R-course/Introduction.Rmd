@@ -1191,8 +1191,13 @@ print("Harry\tRon\nHermione"); cat("Harry\tRon\nHermione")
 
 **Excercise 2**. Create a `k` x `k` matrix of zeros, put `1`s in the positions where $i+j = k+2$ and calculate the sum in every column.
 
-**Excercise 3** Imagine you have a list of observations of bacterial counts in different timepoints in several dishes:
+**Excercise 3**. Imagine you have a list of observations of bacterial counts in different timepoints in several dishes:
 ```{r} 
 bactcounts <- list(plate_1 = c(130,240,344,560), plate_2 = c(200,267,300,222), plate_3 = c(400,370,230,190))
 ```
 Calculate the means and medians of values in every plate and create a named vector `MeMe` which will contain "yes" if a mean count for a plate is less than its median and "no" otherwise.
+
+
+# Acknowledgements
+
+Huge thanks to [Anton Antonov](http://github.com/tonytonov) for his lectures on R on [stepik.org](http://stepik.org).

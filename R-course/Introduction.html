@@ -156,12 +156,12 @@ $(document).ready(function () {
 ## rnorm generates random deviates of the normal distribution:
 ## rnorm(n, mean = 0, sd = 1)</code></pre>
 <pre class="r"><code>rnorm(15)</code></pre>
-<pre><code>##  [1]  1.2779613  0.9770665  1.5781254  1.6168127  0.5971878  0.3138131  3.7566440  1.9790707  1.5176569
-## [10] -0.1415854 -0.1826986  1.9413805 -0.4949091  0.7767212 -2.4161792</code></pre>
+<pre><code>##  [1] -0.09553780  1.93309146  0.94934581 -0.76545537  1.20816864 -0.05707920 -0.09068834  1.18301984
+##  [9] -0.48731356 -0.88478940 -0.85676299 -0.54774311 -1.10325208  0.11197774  0.03430522</code></pre>
 <p>You can list arguments by names:</p>
 <pre class="r"><code>rnorm(15, mean = 5, sd = 3)</code></pre>
-<pre><code>##  [1]  3.629198  3.193115  2.593718  4.213067  2.476361  1.723792  8.068347  7.615813  3.952504 10.574899
-## [11]  5.970928  5.849258  3.930036  8.872442  4.984704</code></pre>
+<pre><code>##  [1]  4.6154238  4.3689347  8.0971623  3.0859121  6.5303328  0.6703535 -2.7652190  1.4827818  5.0408067
+## [10]  5.0729405  8.4507639  4.3070428  2.2789351  1.7208627  9.5811664</code></pre>
 </div>
 <div id="writing-functions" class="section level2">
 <h2>Writing functions</h2>
@@ -956,12 +956,12 @@ if (x &lt; 0) {
 <pre><code>## [1] &quot;Hmm...?&quot;</code></pre>
 <p><strong>ifelse</strong> returns a value with the same shape as test which is filled with elements selected from either yes or no depending on whether the element of test is TRUE or FALSE.</p>
 <pre class="r"><code>ifelse(runif(8) &gt; 0.5, &quot;Heads&quot;, &quot;Tails&quot;)</code></pre>
-<pre><code>## [1] &quot;Tails&quot; &quot;Heads&quot; &quot;Heads&quot; &quot;Heads&quot; &quot;Heads&quot; &quot;Tails&quot; &quot;Heads&quot; &quot;Tails&quot;</code></pre>
+<pre><code>## [1] &quot;Tails&quot; &quot;Heads&quot; &quot;Heads&quot; &quot;Tails&quot; &quot;Heads&quot; &quot;Tails&quot; &quot;Tails&quot; &quot;Heads&quot;</code></pre>
 <p>In other words, you write <code>ifelse( &lt;yes/no&gt; , &lt;yes-action&gt;, &lt;no-action&gt;)</code> if you need a response of the same length as condition. You can also put as many <code>ifelse</code> inside each other as you want.</p>
 <pre class="r"><code>x &lt;- runif(8)
 ifelse(x &gt; 2/3, &quot;Rock&quot;, 
        ifelse(x &gt; 1/3, &quot;Scissors&quot;, &quot;Paper&quot;))</code></pre>
-<pre><code>## [1] &quot;Rock&quot;     &quot;Scissors&quot; &quot;Rock&quot;     &quot;Rock&quot;     &quot;Paper&quot;    &quot;Scissors&quot; &quot;Rock&quot;     &quot;Scissors&quot;</code></pre>
+<pre><code>## [1] &quot;Rock&quot;     &quot;Paper&quot;    &quot;Scissors&quot; &quot;Rock&quot;     &quot;Scissors&quot; &quot;Rock&quot;     &quot;Scissors&quot; &quot;Scissors&quot;</code></pre>
 </div>
 <div id="multiple-choice-switch" class="section level2">
 <h2>Multiple choice: <code>switch</code></h2>
@@ -985,17 +985,16 @@ repeat {
   print(i)
   if (i &gt; 5) break
 }</code></pre>
-<pre><code>## [1] 0.4720419
-## [1] 0.9116232
-## [1] 1.477182
-## [1] 2.152066
-## [1] 3.105515
-## [1] 3.320042
-## [1] 3.738589
-## [1] 4.253642
-## [1] 4.55355
-## [1] 4.647959
-## [1] 5.250969</code></pre>
+<pre><code>## [1] 0.9441298
+## [1] 1.518919
+## [1] 1.811461
+## [1] 2.209161
+## [1] 2.215182
+## [1] 3.209666
+## [1] 4.090844
+## [1] 4.63839
+## [1] 4.988408
+## [1] 5.899978</code></pre>
 </div>
 <div id="while" class="section level3">
 <h3><code>while</code></h3>
@@ -1047,7 +1046,7 @@ system.time({
   y &lt;- sqrt(v)
 })</code></pre>
 <pre><code>##    user  system elapsed 
-##   0.002   0.001   0.003</code></pre>
+##   0.003   0.001   0.004</code></pre>
 <pre class="r"><code>identical(x, y)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 </div>
@@ -1200,9 +1199,13 @@ library(stringr)</code></pre>
 <h1>Tasks</h1>
 <p><strong>Excercise 1</strong>. Create a function that takes argument n and calculates n-th element of <a href="https://en.wikipedia.org/wiki/Fibonacci_number">Fibonacchi</a> sequence.</p>
 <p><strong>Excercise 2</strong>. Create a <code>k</code> x <code>k</code> matrix of zeros, put <code>1</code>s in the positions where <span class="math">\(i+j = k+2\)</span> and calculate the sum in every column.</p>
-<p><strong>Excercise 3</strong> Imagine you have a list of observations of bacterial counts in different timepoints in several dishes:</p>
+<p><strong>Excercise 3</strong>. Imagine you have a list of observations of bacterial counts in different timepoints in several dishes:</p>
 <pre class="r"><code>bactcounts &lt;- list(plate_1 = c(130,240,344,560), plate_2 = c(200,267,300,222), plate_3 = c(400,370,230,190))</code></pre>
 <p>Calculate the means and medians of values in every plate and create a named vector <code>MeMe</code> which will contain “yes” if a mean count for a plate is less than its median and “no” otherwise.</p>
+</div>
+<div id="acknowledgements" class="section level1">
+<h1>Acknowledgements</h1>
+<p>Huge thanks to <a href="http://github.com/tonytonov">Anton Antonov</a> for his lectures on R on <a href="http://stepik.org">stepik.org</a>.</p>
 </div>
 
 
