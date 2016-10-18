@@ -122,8 +122,8 @@ $(document).ready(function () {
 </div>
 
 
-<div id="alternative-introduction." class="section level1">
-<h1>1. Alternative introduction.</h1>
+<div id="functions." class="section level1">
+<h1>1. Functions.</h1>
 <div id="what-to-do-if-nothing-works" class="section level2">
 <h2>What to do if nothing works</h2>
 <blockquote>
@@ -140,28 +140,28 @@ $(document).ready(function () {
 </div>
 <div id="global-environment" class="section level2">
 <h2>Global environment</h2>
-<blockquote>
 <ul>
 <li>Every variable exists in its <em>environment</em></li>
 <li>Variable’s environment - a space where you can find it</li>
 <li>All the variable you create in console go to <em>global environment</em></li>
 <li>You can see these variables if you click “Environment” in RStudio</li>
 </ul>
-</blockquote>
 <pre class="r"><code>ls()</code></pre>
 <pre><code>## character(0)</code></pre>
 </div>
 <div id="functions" class="section level2">
 <h2>Functions</h2>
 <p>R has a lot of built-in functions, i.e. <code>rnorm</code> (which returns a given number of values of a normally distributed random variable):</p>
-<pre class="r"><code>?rnorm</code></pre>
+<pre class="r"><code>?rnorm
+## rnorm generates random deviates of the normal distribution:
+## rnorm(n, mean = 0, sd = 1)</code></pre>
 <pre class="r"><code>rnorm(15)</code></pre>
-<pre><code>##  [1] -1.2406225 -0.8417731  0.2836267  1.7260943  0.2730752 -1.3783641  0.5902089  0.4821117  0.7761251
-## [10] -0.4526862  2.0653499 -0.8910553  1.0589779  0.6282115 -0.7623437</code></pre>
+<pre><code>##  [1]  1.2779613  0.9770665  1.5781254  1.6168127  0.5971878  0.3138131  3.7566440  1.9790707  1.5176569
+## [10] -0.1415854 -0.1826986  1.9413805 -0.4949091  0.7767212 -2.4161792</code></pre>
 <p>You can list arguments by names:</p>
 <pre class="r"><code>rnorm(15, mean = 5, sd = 3)</code></pre>
-<pre><code>##  [1]  7.392344 -2.901959  4.775470  8.014328  4.122184  2.273845  9.012436  4.417782  7.498181 11.634499
-## [11]  2.051688  1.226441  2.240305  2.237190  5.938318</code></pre>
+<pre><code>##  [1]  3.629198  3.193115  2.593718  4.213067  2.476361  1.723792  8.068347  7.615813  3.952504 10.574899
+## [11]  5.970928  5.849258  3.930036  8.872442  4.984704</code></pre>
 </div>
 <div id="writing-functions" class="section level2">
 <h2>Writing functions</h2>
@@ -216,12 +216,10 @@ dogs</code></pre>
 <pre><code>## [1] 1</code></pre>
 <pre class="r"><code>moredogs</code></pre>
 <pre><code>## [1] 11</code></pre>
-<blockquote>
 <ul>
 <li>This is called a function with a <em>side effect</em></li>
 <li>But that’s not a very good thing to do</li>
 </ul>
-</blockquote>
 <div id="removing-variables-from-environment" class="section level2">
 <h2>Removing variables from environment</h2>
 <p>Check what variables do you have:</p>
@@ -241,7 +239,6 @@ ls()</code></pre>
 </div>
 <div id="packages" class="section level1">
 <h1>2. Packages</h1>
-<blockquote>
 <ul>
 <li>R was created to be extendable - it is based on <em>packages</em></li>
 <li>The core of the language – <code>base</code> package</li>
@@ -250,7 +247,6 @@ ls()</code></pre>
 <li>Again: extension modules in R are called packages.</li>
 <li>Library (in R ecosystem) - place on the disk where all available packages are stored.</li>
 </ul>
-</blockquote>
 <p>Check out where your packages are stored:</p>
 <pre class="r"><code>.libPaths()</code></pre>
 <pre><code>## [1] &quot;/Users/nvolkova/Library/R/3.3/library&quot;                         
@@ -324,13 +320,11 @@ biocLite( &lt;package you want to istall&gt; )</code></pre>
 <h1>3. Vectors, lists and matrices</h1>
 <div id="what-is-a-vector" class="section level2">
 <h2>What is a vector</h2>
-<blockquote>
 <ul>
 <li>Vector - basic unit of data structure in R</li>
 <li>More complex structures such as matrix, data frame, factor and lists are based on vectors</li>
 <li>Remember the word ‘vectorisation’ - that’s the main concept</li>
 </ul>
-</blockquote>
 <p>. . .</p>
 <p><span class="math">\[   
 \begin{align}
@@ -353,14 +347,12 @@ biocLite( &lt;package you want to istall&gt; )</code></pre>
 </div>
 <div id="vector" class="section level2">
 <h2>Vector</h2>
-<blockquote>
 <ul>
 <li>Vector is an indexed set of objects of the same type</li>
 <li>R does not differentiate scalar (of length 1) and vector objects</li>
 <li>Vector element enumeration starts with 1 (not 0!)</li>
 <li>To create a vector, you can use a function <code>vector</code></li>
 </ul>
-</blockquote>
 <pre class="r"><code>x &lt;- vector(length = 2)
 x[1] &lt;- 5
 x[2] &lt;- 8
@@ -408,12 +400,10 @@ y</code></pre>
 </div>
 <div id="types-of-vectors" class="section level2">
 <h2>Types of vectors</h2>
-<blockquote>
 <ul>
 <li>Atomic vectors: all elements are of the same type</li>
 <li>Main types:</li>
 </ul>
-</blockquote>
 <ol style="list-style-type: decimal">
 <li>logical (TRUE/FALSE)</li>
 <li>integer</li>
@@ -579,22 +569,19 @@ x[ind] &lt;- val</code></pre>
 <pre class="r"><code>which.max(x)</code></pre>
 <pre><code>## [1] 10</code></pre>
 </div>
-</div>
-<div id="matrix" class="section level1">
-<h1>Matrix</h1>
-<blockquote>
+<div id="matrix" class="section level2">
+<h2>Matrix</h2>
 <ul>
 <li>Matrix is a 2-dimensional array of data of the same type</li>
 <li>There is a function <code>matrix</code></li>
 </ul>
-</blockquote>
 <pre class="r"><code>matrix(1:6, nrow = 2, ncol = 3)</code></pre>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    1    3    5
 ## [2,]    2    4    6</code></pre>
 </div>
-<div id="matrix-making" class="section level1">
-<h1>Matrix making</h1>
+<div id="matrix-making" class="section level2">
+<h2>Matrix making</h2>
 <p>You can shorten the notation without loosing any information:</p>
 <pre class="r"><code>matrix(1:6, nrow = 2)</code></pre>
 <pre><code>##      [,1] [,2] [,3]
@@ -608,6 +595,7 @@ x[ind] &lt;- val</code></pre>
 <pre><code>##      [,1] [,2] [,3] [,4] [,5]
 ## [1,]    7    7    7    7    7
 ## [2,]    8    8    8    8    8</code></pre>
+</div>
 <div id="attribute-dim" class="section level2">
 <h2>Attribute <code>dim</code></h2>
 <p>With this attribute (feature of an object) you can assess the dimensionality of your matrix:</p>
@@ -644,7 +632,7 @@ m2 &lt;- matrix(c(1, 2, 2, 3), nrow = 2)</code></pre>
 <pre><code>##      [,1] [,2]
 ## [1,]    1    6
 ## [2,]    4   12</code></pre>
-<p>Linear algebra operations like matrix product should be written in <code>% %</code>:</p>
+<p>Linear algebra matrix multiplication should be written in <code>% %</code>:</p>
 <pre class="r"><code>m1 %*% m2</code></pre>
 <pre><code>##      [,1] [,2]
 ## [1,]    7   11
@@ -669,9 +657,8 @@ m[1, 3]</code></pre>
 ## [1,]   11   13   15   17    0
 ## [2,]   12   14   16   18   10</code></pre>
 </div>
-</div>
-<div id="collapsing-dimensions" class="section level1">
-<h1>Collapsing dimensions</h1>
+<div id="collapsing-dimensions" class="section level2">
+<h2>Collapsing dimensions</h2>
 <p>If you want to access a particular part of a matrix, you just treat it as a vector of rows and vector of columns:</p>
 <pre class="r"><code>m &lt;- matrix(1:10, ncol = 5)
 ind &lt;- c(1, 3, 5)
@@ -686,6 +673,7 @@ m[, ind]</code></pre>
 <pre><code>##      [,1]
 ## [1,]    5
 ## [2,]    6</code></pre>
+</div>
 <div id="named-matrices-rownamescolnames" class="section level2">
 <h2>Named matrices: <code>rownames</code>/<code>colnames</code></h2>
 <p>If columns and rows of a matrix are named, they can also be called using these names:</p>
@@ -922,12 +910,11 @@ l</code></pre>
 <h1>4. <code>if</code> и <code>else</code></h1>
 <p>Decision making is an important part of programming. This can be achieved in R programming using the conditional <strong>if…else</strong> statement.</p>
 <pre class="r"><code>if (&lt;condition&gt;) {&lt;do something&gt;} else {&lt;do another thing&gt;}</code></pre>
-<blockquote>
 <ul>
 <li>Here &lt;condition&gt; is an expression that results in logical vector of length 1 (<code>TRUE</code> or <code>FALSE</code>, <code>NA</code> will produce an error)</li>
 <li>&lt;do something&gt; and &lt;do another thing&gt; – arbitrary commands</li>
+<li>You can put multiple conditions by using <code>|</code> as <em>OR</em> or <code>&amp;</code> as <em>AND</em>.</li>
 </ul>
-</blockquote>
 <p>Check out this:</p>
 <pre class="r"><code>if (sqrt(2) &gt; 1.5) {
   print(&quot;Greater!&quot;)
@@ -935,7 +922,7 @@ l</code></pre>
   print(&quot;Less!&quot;)
 }</code></pre>
 <pre><code>## [1] &quot;Less!&quot;</code></pre>
-<p>NB: do not transfer <code>else</code> on a new string!</p>
+<p><strong>NB</strong>: do not transfer <code>else</code> on a new string!</p>
 <p>The above conditional can also be written in a single line as follows.</p>
 <pre><code>## [1] &quot;Less!&quot;</code></pre>
 <div id="nested-ifelse-statement" class="section level2">
@@ -969,12 +956,12 @@ if (x &lt; 0) {
 <pre><code>## [1] &quot;Hmm...?&quot;</code></pre>
 <p><strong>ifelse</strong> returns a value with the same shape as test which is filled with elements selected from either yes or no depending on whether the element of test is TRUE or FALSE.</p>
 <pre class="r"><code>ifelse(runif(8) &gt; 0.5, &quot;Heads&quot;, &quot;Tails&quot;)</code></pre>
-<pre><code>## [1] &quot;Tails&quot; &quot;Heads&quot; &quot;Tails&quot; &quot;Heads&quot; &quot;Heads&quot; &quot;Heads&quot; &quot;Tails&quot; &quot;Heads&quot;</code></pre>
+<pre><code>## [1] &quot;Tails&quot; &quot;Heads&quot; &quot;Heads&quot; &quot;Heads&quot; &quot;Heads&quot; &quot;Tails&quot; &quot;Heads&quot; &quot;Tails&quot;</code></pre>
 <p>In other words, you write <code>ifelse( &lt;yes/no&gt; , &lt;yes-action&gt;, &lt;no-action&gt;)</code> if you need a response of the same length as condition. You can also put as many <code>ifelse</code> inside each other as you want.</p>
 <pre class="r"><code>x &lt;- runif(8)
 ifelse(x &gt; 2/3, &quot;Rock&quot;, 
        ifelse(x &gt; 1/3, &quot;Scissors&quot;, &quot;Paper&quot;))</code></pre>
-<pre><code>## [1] &quot;Rock&quot;     &quot;Rock&quot;     &quot;Rock&quot;     &quot;Rock&quot;     &quot;Rock&quot;     &quot;Rock&quot;     &quot;Paper&quot;    &quot;Scissors&quot;</code></pre>
+<pre><code>## [1] &quot;Rock&quot;     &quot;Scissors&quot; &quot;Rock&quot;     &quot;Rock&quot;     &quot;Paper&quot;    &quot;Scissors&quot; &quot;Rock&quot;     &quot;Scissors&quot;</code></pre>
 </div>
 <div id="multiple-choice-switch" class="section level2">
 <h2>Multiple choice: <code>switch</code></h2>
@@ -998,16 +985,17 @@ repeat {
   print(i)
   if (i &gt; 5) break
 }</code></pre>
-<pre><code>## [1] 0.3451358
-## [1] 1.231279
-## [1] 1.685312
-## [1] 2.626793
-## [1] 2.917316
-## [1] 3.44884
-## [1] 3.959483
-## [1] 3.969036
-## [1] 4.905585
-## [1] 5.23794</code></pre>
+<pre><code>## [1] 0.4720419
+## [1] 0.9116232
+## [1] 1.477182
+## [1] 2.152066
+## [1] 3.105515
+## [1] 3.320042
+## [1] 3.738589
+## [1] 4.253642
+## [1] 4.55355
+## [1] 4.647959
+## [1] 5.250969</code></pre>
 </div>
 <div id="while" class="section level3">
 <h3><code>while</code></h3>
@@ -1059,342 +1047,33 @@ system.time({
   y &lt;- sqrt(v)
 })</code></pre>
 <pre><code>##    user  system elapsed 
-##   0.001   0.000   0.000</code></pre>
+##   0.002   0.001   0.003</code></pre>
 <pre class="r"><code>identical(x, y)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 </div>
 </div>
 </div>
-<div id="data-frames-reading-data-in-r" class="section level1">
-<h1>5. Data frames, reading data in R</h1>
-</div>
-<div id="data-frame" class="section level1">
-<h1>Data frame</h1>
-<blockquote>
-<ul>
-<li>Data frame – 2-dimensional table with data (Excel spreadsheet, SQL-таблица)</li>
-<li>De facto it is standard way of data storage as “observations/variables”: <br> rows are associated with observations, columns – with variables</li>
-</ul>
-</blockquote>
-<table>
-<thead>
-<tr class="header">
-<th align="left">Places</th>
-<th align="right">N_coord</th>
-<th align="right">E_coord</th>
-<th align="right">Date</th>
-<th align="right">Temp</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">MM Faculty</td>
-<td align="right">59.88</td>
-<td align="right">29.83</td>
-<td align="right">07.01.2014</td>
-<td align="right">-15</td>
-</tr>
-<tr class="even">
-<td align="left">PP Fortress</td>
-<td align="right">59.95</td>
-<td align="right">30.32</td>
-<td align="right">15.05.2013</td>
-<td align="right">17</td>
-</tr>
-<tr class="odd">
-<td align="left">SPbU main</td>
-<td align="right">59.94</td>
-<td align="right">30.3</td>
-<td align="right">22.06.2013</td>
-<td align="right">22</td>
-</tr>
-<tr class="even">
-<td align="left">MM Faculty</td>
-<td align="right">59.88</td>
-<td align="right">29.83</td>
-<td align="right">09.01.2014</td>
-<td align="right">-21</td>
-</tr>
-<tr class="odd">
-<td align="left">…</td>
-<td align="right">…</td>
-<td align="right">…</td>
-<td align="right">…</td>
-<td align="right">…</td>
-</tr>
-</tbody>
-</table>
-<p>data frame inherited properties of matrices (rectangular shape) and lists (variables can have different types).</p>
-</div>
-<div id="creating-data-frames" class="section level1">
-<h1>Creating data frames</h1>
-<pre class="r"><code>df &lt;- data.frame(x = 1:4, y = LETTERS[1:4], z = c(T, F))
-df</code></pre>
-<pre><code>##   x y     z
-## 1 1 A  TRUE
-## 2 2 B FALSE
-## 3 3 C  TRUE
-## 4 4 D FALSE</code></pre>
-<p>Function <code>str</code> – сводка об объекте:</p>
-<pre class="r"><code>str(df)</code></pre>
-<pre><code>## 'data.frame':    4 obs. of  3 variables:
-##  $ x: int  1 2 3 4
-##  $ y: Factor w/ 4 levels &quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;D&quot;: 1 2 3 4
-##  $ z: logi  TRUE FALSE TRUE FALSE</code></pre>
-</div>
-<div class="section level1">
-<h1>Имена</h1>
-<p>. . .</p>
-<pre class="r"><code>df &lt;- data.frame(x = 1:4, y = LETTERS[1:4], z = c(T, F), 
-                 row.names = c(&quot;Alpha&quot;, &quot;Bravo&quot;, &quot;Charlie&quot;, &quot;Delta&quot;))
-df</code></pre>
-<pre><code>##         x y     z
-## Alpha   1 A  TRUE
-## Bravo   2 B FALSE
-## Charlie 3 C  TRUE
-## Delta   4 D FALSE</code></pre>
-<p>. . .</p>
-<pre class="r"><code>rownames(df); colnames(df) #dimnames(df)</code></pre>
-<pre><code>## [1] &quot;Alpha&quot;   &quot;Bravo&quot;   &quot;Charlie&quot; &quot;Delta&quot;</code></pre>
-<pre><code>## [1] &quot;x&quot; &quot;y&quot; &quot;z&quot;</code></pre>
-</div>
-<div class="section level1">
-<h1>Размерности</h1>
-<p>. . .</p>
-<pre class="r"><code>nrow(df); ncol(df) #dim(df)</code></pre>
-<pre><code>## [1] 4</code></pre>
-<pre><code>## [1] 3</code></pre>
-<p>. . .</p>
-<p>Две важные особенности:</p>
-<blockquote>
-<ul>
-<li>‌ <code>length(df)</code> возвращает количество <em>столбцов</em> (переменных), а не общее количество элементов</li>
-<li>‌ <code>names(df)</code> также возвращает имена столбцов</li>
-</ul>
-</blockquote>
-<p>. . .</p>
-<pre class="r"><code>length(df); names(df)</code></pre>
-<pre><code>## [1] 3</code></pre>
-<pre><code>## [1] &quot;x&quot; &quot;y&quot; &quot;z&quot;</code></pre>
-</div>
-<div id="-data-frame" class="section level1">
-<h1>Индексация data frame</h1>
-<p>. . .</p>
-<p>Как для матрицы:</p>
-<pre class="r"><code>df[3:4, -1]</code></pre>
-<pre><code>##         y     z
-## Charlie C  TRUE
-## Delta   D FALSE</code></pre>
-<p>. . .</p>
-<pre class="r"><code>df[c(F, T), c(&quot;z&quot;, &quot;x&quot;)]</code></pre>
-<pre><code>##           z x
-## Bravo FALSE 2
-## Delta FALSE 4</code></pre>
-</div>
-<div id="-data-frame-1" class="section level1">
-<h1>Индексация data frame</h1>
-<p>. . .</p>
-<pre class="r"><code>df[, 1]; df[, 1, drop = FALSE]</code></pre>
-<pre><code>## [1] 1 2 3 4</code></pre>
-<pre><code>##         x
-## Alpha   1
-## Bravo   2
-## Charlie 3
-## Delta   4</code></pre>
-<p>. . .</p>
-<p>Как для списка:</p>
-<pre class="r"><code>df$z #df[[3]]; df[[&quot;z&quot;]]</code></pre>
-<pre><code>## [1]  TRUE FALSE  TRUE FALSE</code></pre>
-</div>
-<div id="--" class="section level1">
-<h1>Фильтрация по условию</h1>
-<p>. . .</p>
-<pre class="r"><code>df[df$x &gt; 2, ]</code></pre>
-<pre><code>##         x y     z
-## Charlie 3 C  TRUE
-## Delta   4 D FALSE</code></pre>
-<p>. . .</p>
-<pre class="r"><code>subset(df, x &gt; 2)</code></pre>
-<pre><code>##         x y     z
-## Charlie 3 C  TRUE
-## Delta   4 D FALSE</code></pre>
-<p>. . .</p>
-<pre class="r"><code>subset(df, x &gt; 2, select = c(x, z))</code></pre>
-<pre><code>##         x     z
-## Charlie 3  TRUE
-## Delta   4 FALSE</code></pre>
-</div>
-<div id="-data-frame" class="section level1">
-<h1>Комбинирование data frame</h1>
-<p>. . .</p>
-<p>Функции <code>rbind</code>/<code>cbind</code> работают как для матриц:</p>
-<pre class="r"><code>rbind(df, data.frame(x = 5:6, y = c(&quot;K&quot;, &quot;Z&quot;), z = TRUE, row.names = c(&quot;Kappa&quot;, &quot;Zulu&quot;)))</code></pre>
-<pre><code>##         x y     z
-## Alpha   1 A  TRUE
-## Bravo   2 B FALSE
-## Charlie 3 C  TRUE
-## Delta   4 D FALSE
-## Kappa   5 K  TRUE
-## Zulu    6 Z  TRUE</code></pre>
-<p>. . .</p>
-<pre class="r"><code>cbind(df, data.frame(season = c(&quot;Summer&quot;, &quot;Autumn&quot;, &quot;Winter&quot;, &quot;Spring&quot;), temp = c(20, 5, -10, 5)))</code></pre>
-<pre><code>##         x y     z season temp
-## Alpha   1 A  TRUE Summer   20
-## Bravo   2 B FALSE Autumn    5
-## Charlie 3 C  TRUE Winter  -10
-## Delta   4 D FALSE Spring    5</code></pre>
-</div>
-<div id="-data-frame-merge" class="section level1">
-<h1>Комбинирование data frame: <code>merge</code></h1>
-<p>. . .</p>
-<pre class="r"><code>df</code></pre>
-<pre><code>##         x y     z
-## Alpha   1 A  TRUE
-## Bravo   2 B FALSE
-## Charlie 3 C  TRUE
-## Delta   4 D FALSE</code></pre>
-<p>. . .</p>
-<pre class="r"><code>df_salary &lt;- data.frame(x = c(3, 2, 6, 1), salary = c(100, 1000, 300, 500))
-merge(df, df_salary, by = &quot;x&quot;)</code></pre>
-<pre><code>##   x y     z salary
-## 1 1 A  TRUE    500
-## 2 2 B FALSE   1000
-## 3 3 C  TRUE    100</code></pre>
-<p>. . .</p>
-<p>Для тех, кто знаком с SQL: это inner join.</p>
-<p>Остальные типы (left, right, outer, cross join) легко найти на stackoverflow по запросу “r joins”.</p>
-</div>
-<div id="-" class="section level1">
-<h1>Импорт данных</h1>
-<blockquote>
-<ul>
-<li>Из файла:
-<ul>
-<li>Comma separated values (.csv), tab separated values</li>
-<li>Неструктурированный текст – <code>readLines</code>, <code>scan</code></li>
-<li>XML, HTML – <code>library(XML)</code>, <code>library(httr)</code>, …</li>
-<li>JSON, YAML – <code>library(rjson)</code>, <code>library(RJSONIO)</code>, …</li>
-<li>Excel – <code>library(XLConnect)</code>, <code>library(readxl)</code></li>
-<li>SAS, Stata, SPSS, MATLAB – <code>library(foreign)</code>, <code>library(sas7bdat)</code></li>
-</ul></li>
-<li>Web – <code>library(rvest)</code></li>
-<li>Базы данных:
-<ul>
-<li>Реляционные – <code>library(DBI)</code>, <code>library(RSQLite)</code>, …</li>
-<li>Нереляционные – <code>library(rmongodb)</code>, …</li>
-</ul></li>
-<li>…</li>
-</ul>
-</blockquote>
-</div>
-<div id="--" class="section level1">
-<h1>Чтение табличных данных</h1>
-<p>Основной инструмент: <code>read.table</code></p>
-<blockquote>
-<ul>
-<li><code>file</code> – имя файла</li>
-<li><code>header</code> – наличие или отсутствие заголовка в первой строке</li>
-<li><code>sep</code> – разделитель значений, <code>dec</code> – десятичная точка</li>
-<li><code>quote</code> – символы, обозначающие кавычки (для строкового типа)</li>
-<li><code>na.strings</code> – строки, кодирующие пропущенное значение</li>
-<li><code>colClasses</code> – типы столбцов (для быстродействия и указания типа: строка-фактор-дата/время)</li>
-<li><code>comment.char</code> – символ, обозначающий комментарий</li>
-<li><code>skip</code> – количество строк пропускаемых c начала файла</li>
-</ul>
-</blockquote>
-<p>. . .</p>
-<p>Функции <code>read.csv</code>, <code>read.csv2</code>, <code>read.delim</code> и <code>read.delim2</code> суть оболочки над <code>read.table</code> с расставленными умолчаниями</p>
-</div>
-<div id="---" class="section level1">
-<h1>Типичные этапы (пред)обработки данных</h1>
-<blockquote>
-<ul>
-<li>Импорт в дата фрейм</li>
-<li>Очистка значений, проверка типов</li>
-<li>Работа со строками: имена, переменные строкового типа, факторы</li>
-<li>Пропущенные значения: идентификация, способ обработки</li>
-<li>Манипулирование переменными: преобразование, создание, удаление</li>
-<li>Подсчёт описательных статистик: split-apply-combine</li>
-<li>Визуализация данных</li>
-<li>Экспорт</li>
-</ul>
-</blockquote>
-</div>
-<div id="---" class="section level1">
-<h1>Очистка значений, проверка типов</h1>
-<p>Типы переменных, на которых легко ошибиться при импорте:</p>
-<blockquote>
-<ul>
-<li>Числовые типы становятся строковыми
-<ul>
-<li>из-за пропущенных значений, отмеченных не как <code>NA</code> <code>na.strings = c(&quot;NA&quot;, &quot;Not Available&quot;, &quot;Missing&quot;)</code></li>
-<li>из-за неверно указанных разделителя, десятичного знака <br> <code>sep = &quot;,&quot;</code>, <code>dec = &quot;.&quot;</code></li>
-<li>из-за кавычек, сопроводительного текста или комментариев <br> <code>quote</code>, <code>comment.char</code>, <code>skip</code></li>
-</ul></li>
-<li>Строковые типы становятся факторами либо наоборот <br> <code>as.character</code>, <code>as.factor</code></li>
-<li>Тип “дата/время” остаётся строковым <code>as.POSIXct</code>, <code>as.POSIXlt</code>, <code>as.Date</code></li>
-</ul>
-</blockquote>
-<p>. . .</p>
-<p>Функции <code>str</code>, <code>summary</code>, <code>head</code> и <code>tail</code> помогут определить, всё ли в порядке</p>
-</div>
-<div id="--" class="section level1">
-<h1>Работа с переменными</h1>
-<blockquote>
-<ul>
-<li>Функции <code>complete.cases</code> и <code>na.omit</code> для удаления наблюдений с пропущенными значениями: <br> <code>df[complete.cases(df), ]</code> либо <code>na.omit(df)</code></li>
-<li>Замена NA на некоторые значения может быть потенциально опасной
-<ul>
-<li>заполнение средним может вносить смещение в данные</li>
-<li>заполнение нулями в большинстве случаев вообще некорректно!</li>
-</ul></li>
-<li>Создание, изменение и удаление переменных выполняется конструкциями <br> <code>df$new_var &lt;- &lt;...&gt;</code>, <br> <code>df$old_var &lt;- f(df$old_var)</code>, <br> <code>df$old_var &lt;- NULL</code></li>
-<li>Кроме того, для работы сразу с большим количеством переменных есть функция <code>within</code></li>
-</ul>
-</blockquote>
-<div id="export" class="section level2">
-<h2>Export</h2>
-<blockquote>
-<ul>
-<li><code>write.table</code>, <code>write.csv</code> and <code>write.csv2</code> – almost identical to import functions</li>
-<li>If an array is big enough, it;s better to separate the pre-processing step
-<ul>
-<li>in a separate “.R” file</li>
-<li>write the preprocessed (“clean”) data in a separate file</li>
-</ul></li>
-</ul>
-</blockquote>
-<p>McNew, L. B. and C. M. Handel. 2015. Evaluating species richness: biased ecological inference results from spatial heterogeneity in species detection probabilities. Ecological Applications 25:1669-1680. <a href="doi:10.1890/14-1248.1" class="uri">doi:10.1890/14-1248.1</a></p>
-<p>Ссылка на данные: <a href="http://alaska.usgs.gov/products/data.php?dataid=5"><a href="http://alaska.usgs.gov/products/data.php?dataid=5" class="uri">http://alaska.usgs.gov/products/data.php?dataid=5</a></a> либо <a href="https://github.com/tonytonov/Rcourse/blob/master/avianHabitat.csv"><a href="https://github.com/tonytonov/Rcourse/blob/master/avianHabitat.csv" class="uri">https://github.com/tonytonov/Rcourse/blob/master/avianHabitat.csv</a></a></p>
-</div>
-</div>
 <div id="strings" class="section level1">
-<h1>6. Strings</h1>
-<blockquote>
+<h1>5. Strings</h1>
 <ul>
 <li>String is an element of a vector of type <code>character</code></li>
 <li>Most of the functions operating with strings are vectorized</li>
 </ul>
-</blockquote>
 <pre class="r"><code>s &lt;- c(&quot;Trump and republicans!&quot;, 
        &quot;Clinton and democrates?&quot;,
        'Against all.')</code></pre>
-<blockquote>
 <ul>
 <li>Usually you would use quotation marks to designate a string</li>
 <li>But ‘’ also work: <code>'&quot;Smart&quot; watch'</code></li>
 </ul>
-</blockquote>
 <pre><code>## [1] &quot;\&quot;Smart\&quot; watch&quot;</code></pre>
 <div id="functions-pastepaste0" class="section level2">
 <h2>Functions <code>paste</code>/<code>paste0</code></h2>
-<blockquote>
 <ul>
 <li>This functions perform concatenation of string vectors with respect to rewriting rules</li>
 <li>Argument <code>sep</code> – separator between elements (by default, for <code>paste</code> it is space, for <code>paste0</code> – empty line)</li>
 <li>Argument <code>collapse</code> – “collapses” vector into one string</li>
 </ul>
-</blockquote>
 <pre class="r"><code>paste(c(&quot;Beautiful&quot;, &quot;Dirty&quot;), &quot;Rich&quot;)</code></pre>
 <pre><code>## [1] &quot;Beautiful Rich&quot; &quot;Dirty Rich&quot;</code></pre>
 <pre class="r"><code>paste(c(&quot;Beautiful&quot;, &quot;Dirty&quot;), &quot;Rich&quot;, sep = &quot;_&quot;)</code></pre>
@@ -1404,12 +1083,10 @@ merge(df, df_salary, by = &quot;x&quot;)</code></pre>
 </div>
 <div id="function-strsplit" class="section level2">
 <h2>Function <code>strsplit</code></h2>
-<blockquote>
 <ul>
 <li>Splits a string vector</li>
 <li><strong>NB</strong>: The result is a list!</li>
 </ul>
-</blockquote>
 <pre class="r"><code>strsplit(s, &quot; и &quot;, fixed = TRUE)</code></pre>
 <pre><code>## [[1]]
 ## [1] &quot;Trump and republicans!&quot;
@@ -1432,12 +1109,10 @@ merge(df, df_salary, by = &quot;x&quot;)</code></pre>
 </div>
 <div id="regular-expressions" class="section level2">
 <h2>Regular expressions</h2>
-<blockquote>
 <ul>
 <li>“Metalanguage” of search and substring manipulation</li>
 <li>The search template can include usual symbols and so-called <em>wildcards</em></li>
 </ul>
-</blockquote>
 <pre class="r"><code>grep(&quot;Trump&quot;, s)</code></pre>
 <pre><code>## [1] 1</code></pre>
 <pre class="r"><code>grepl(&quot;Trump&quot;, s)</code></pre>
@@ -1491,13 +1166,11 @@ library(stringr)</code></pre>
 ## [6] &quot;Bonus.html&quot;</code></pre>
 <pre class="r"><code>list.dirs(&quot;..&quot;, recursive = FALSE)</code></pre>
 <pre><code>## [1] &quot;../nvolkova&quot; &quot;../Shared&quot;</code></pre>
-<blockquote>
 <ul>
 <li>Use the function <code>setwd</code> to change working directory.</li>
 <li>When you create a new project in RStudio, the working directory is the folder where project file <code>.Rproj</code> is located.</li>
 <li>Catalogues separators in Windows: either <code>/</code>, or <code>\\</code></li>
 </ul>
-</blockquote>
 </div>
 <div id="number-formatting" class="section level2">
 <h2>Number formatting</h2>
@@ -1510,12 +1183,10 @@ library(stringr)</code></pre>
 </div>
 <div id="function-cat" class="section level2">
 <h2>Function <code>cat</code></h2>
-<blockquote>
 <ul>
 <li>Usually the function <code>print</code> is used for output</li>
 <li>Function <code>cat</code> can print the objects “as they are”</li>
 </ul>
-</blockquote>
 <pre class="r"><code>print('&quot;Smart&quot; watch'); cat('&quot;Smart&quot; watch')</code></pre>
 <pre><code>## [1] &quot;\&quot;Smart\&quot; watch&quot;</code></pre>
 <pre><code>## &quot;Smart&quot; watch</code></pre>
@@ -1524,6 +1195,14 @@ library(stringr)</code></pre>
 <pre><code>## Harry    Ron
 ## Hermione</code></pre>
 </div>
+</div>
+<div id="tasks" class="section level1">
+<h1>Tasks</h1>
+<p><strong>Excercise 1</strong>. Create a function that takes argument n and calculates n-th element of <a href="https://en.wikipedia.org/wiki/Fibonacci_number">Fibonacchi</a> sequence.</p>
+<p><strong>Excercise 2</strong>. Create a <code>k</code> x <code>k</code> matrix of zeros, put <code>1</code>s in the positions where <span class="math">\(i+j = k+2\)</span> and calculate the sum in every column.</p>
+<p><strong>Excercise 3</strong> Imagine you have a list of observations of bacterial counts in different timepoints in several dishes:</p>
+<pre class="r"><code>bactcounts &lt;- list(plate_1 = c(130,240,344,560), plate_2 = c(200,267,300,222), plate_3 = c(400,370,230,190))</code></pre>
+<p>Calculate the means and medians of values in every plate and create a named vector <code>MeMe</code> which will contain “yes” if a mean count for a plate is less than its median and “no” otherwise.</p>
 </div>
 
 

@@ -9,7 +9,7 @@ output: html_document
 options(width = 110)
 ```
 
-# 1. Alternative introduction.
+# 1. Functions.
 
 ## What to do if nothing works
 
@@ -24,10 +24,10 @@ options(width = 110)
   
 ## Global environment
   
->- Every variable exists in its _environment_
->- Variable's environment - a space where you can find it
->- All the variable you create in console go to _global environment_
->- You can see these variables if you click "Environment" in RStudio
+* Every variable exists in its _environment_
+* Variable's environment - a space where you can find it
+* All the variable you create in console go to _global environment_
+* You can see these variables if you click "Environment" in RStudio
 
 ```{r}
 ls()
@@ -39,6 +39,8 @@ R has a lot of built-in functions, i.e. `rnorm` (which returns a given number of
 
 ```{r}
 ?rnorm
+## rnorm generates random deviates of the normal distribution:
+## rnorm(n, mean = 0, sd = 1)
 ```
 
 ```{r}
@@ -115,8 +117,8 @@ dogs
 moredogs
 ```
 
->- This is called a function with a _side effect_
->- But that's not a very good thing to do
+* This is called a function with a _side effect_
+* But that's not a very good thing to do
 
 ## Removing variables from environment
 
@@ -147,12 +149,12 @@ But be careful when removing variables!
 # 2. Packages
 
 
->- R was created to be extendable - it is based on _packages_
->- The core of the language -- `base` package
->- There are several other packages uploaded with `base` by default, others can be called without installation
->- Don't mix up `package` and `library`!
->- Again: extension modules in R are called packages.
->- Library (in R ecosystem) - place on the disk where all available packages are stored.
+* R was created to be extendable - it is based on _packages_
+* The core of the language -- `base` package
+* There are several other packages uploaded with `base` by default, others can be called without installation
+* Don't mix up `package` and `library`!
+* Again: extension modules in R are called packages.
+* Library (in R ecosystem) - place on the disk where all available packages are stored.
 
 Check out where your packages are stored:
 
@@ -219,9 +221,9 @@ biocLite( <package you want to istall> )
 # 3. Vectors, lists and matrices
 
 ## What is a vector
->- Vector - basic unit of data structure in R
->- More complex structures such as matrix, data frame, factor and lists are based on vectors
->- Remember the word 'vectorisation' - that's the main concept
+* Vector - basic unit of data structure in R
+* More complex structures such as matrix, data frame, factor and lists are based on vectors
+* Remember the word 'vectorisation' - that's the main concept
 
 . . .
 
@@ -245,10 +247,11 @@ $$
 $$
 
 ## Vector
->- Vector is an indexed set of objects of the same type
->- R does not differentiate scalar (of length 1) and vector objects
->- Vector element enumeration starts with 1 (not 0!)
->- To create a vector, you can use a function `vector`
+
+* Vector is an indexed set of objects of the same type
+* R does not differentiate scalar (of length 1) and vector objects
+* Vector element enumeration starts with 1 (not 0!)
+* To create a vector, you can use a function `vector`
 
 ```{r}
 x <- vector(length = 2)
@@ -310,9 +313,8 @@ rep(1:3, length.out = 5)
 ```
 
 ## Types of vectors
->- Atomic vectors: all elements are of the same type
->- Main types:
-
+* Atomic vectors: all elements are of the same type
+* Main types:
   1. logical (TRUE/FALSE)
   2. integer
   3. numeric/double 
@@ -498,6 +500,7 @@ x[c(-3, -5, -length(x), -5)]
 ## Logical indices
 
 Equals "Elements whose corresponding value is TRUE":
+
 ```{r}
 x[rep(c(TRUE, FALSE), 5)]
 ```
@@ -513,6 +516,7 @@ x[x > 77 & x < 99]
 ## Indexing via names
 
 For names vectors, you can use the dollowing construct:
+
 ```{r}
 a[c("two", "one", "forty two")]
 ```
@@ -542,16 +546,16 @@ which.min(x)
 which.max(x)
 ```
 
-# Matrix
+## Matrix
 
->- Matrix is a 2-dimensional array of data of the same type
->- There is a function `matrix`
+* Matrix is a 2-dimensional array of data of the same type
+* There is a function `matrix`
 
 ```{r}
 matrix(1:6, nrow = 2, ncol = 3)
 ```
 
-# Matrix making
+## Matrix making
 
 You can shorten the notation without loosing any information:
 
@@ -601,7 +605,7 @@ m1 * 2
 m1 * m2
 ```
 
-Linear algebra operations like matrix product should be written in `% %`:
+Linear algebra matrix multiplication should be written in `% %`:
 ```{r}
 m1 %*% m2
 ```
@@ -628,7 +632,7 @@ m[1, ] <- 0; m
 m[, -5] <- 11:18; m
 ```
 
-# Collapsing dimensions
+## Collapsing dimensions
 
 If you want to access a particular part of a matrix, you just treat it as a vector of rows and vector of columns:
 
@@ -866,8 +870,9 @@ Decision making is an important part of programming. This can be achieved in R p
 if (<condition>) {<do something>} else {<do another thing>}
 ```
 
->- Here \<condition\> is an expression that results in logical vector of length 1 (`TRUE` or `FALSE`, `NA` will produce an error)
->- \<do something\> and \<do another thing\> -- arbitrary commands
+* Here \<condition\> is an expression that results in logical vector of length 1 (`TRUE` or `FALSE`, `NA` will produce an error)
+* \<do something\> and \<do another thing\> -- arbitrary commands
+* You can put multiple conditions by using `|` as _OR_ or `&` as _AND_.
 
 Check out this:
 
@@ -879,7 +884,7 @@ if (sqrt(2) > 1.5) {
 }
 ```
 
-NB: do not transfer `else` on a new string!
+**NB**: do not transfer `else` on a new string!
 
 The above conditional can also be written in a single line as follows.
 
@@ -1027,262 +1032,10 @@ identical(x, y)
 ```
 
 
+# 5. Strings
 
-
-# 5. Data frames, reading data in R
-
-# Data frame
-
->- Data frame -- 2-dimensional table with data (Excel spreadsheet, SQL-таблица)
->- De facto it is standard way of data storage as "observations/variables": <br> rows are associated with observations, columns -- with variables
-
-Places        N\_coord     E\_coord           Date     Temp
--------      ---------    ---------     ----------   ------
-MM Faculty       59.88        29.83     07.01.2014      -15
-PP Fortress      59.95        30.32     15.05.2013       17
-SPbU main        59.94        30.3      22.06.2013       22
-MM Faculty       59.88        29.83     09.01.2014      -21
-...                ...          ...            ...      ...
-
-data frame inherited properties of matrices (rectangular shape) and lists (variables can have different types).
-
-# Creating data frames
-
-```{r}
-df <- data.frame(x = 1:4, y = LETTERS[1:4], z = c(T, F))
-df
-```
-
-Function `str` -- сводка об объекте:
-```{r}
-str(df)
-```
-
-# Имена
-
-. . .
-
-```{r}
-df <- data.frame(x = 1:4, y = LETTERS[1:4], z = c(T, F), 
-                 row.names = c("Alpha", "Bravo", "Charlie", "Delta"))
-df
-```
-
-. . .
-
-```{r}
-rownames(df); colnames(df) #dimnames(df)
-```
-
-# Размерности
-
-. . .
-
-```{r}
-nrow(df); ncol(df) #dim(df)
-```
-
-. . .
-
-Две важные особенности:
-
->- &zwnj; `length(df)` возвращает количество _столбцов_ (переменных), а не общее количество элементов
->- &zwnj; `names(df)` также возвращает имена столбцов 
-
-. . .
-
-```{r}
-length(df); names(df)
-```
-
-# Индексация data frame
-
-. . .
-
-Как для матрицы:
-
-```{r}
-df[3:4, -1]
-```
-
-. . .
-
-```{r}
-df[c(F, T), c("z", "x")]
-```
-
-# Индексация data frame
-
-. . .
-
-```{r}
-df[, 1]; df[, 1, drop = FALSE]
-```
-
-. . .
-
-Как для списка:
-
-```{r}
-df$z #df[[3]]; df[["z"]]
-```
-
-# Фильтрация по условию
-
-. . .
-
-```{r}
-df[df$x > 2, ]
-```
-
-. . .
-
-```{r}
-subset(df, x > 2)
-```
-
-. . .
-
-```{r}
-subset(df, x > 2, select = c(x, z))
-```
-
-# Комбинирование data frame
-
-. . . 
-
-Функции `rbind`/`cbind` работают как для матриц:
-
-```{r}
-rbind(df, data.frame(x = 5:6, y = c("K", "Z"), z = TRUE, row.names = c("Kappa", "Zulu")))
-```
-
-. . .
-
-```{r}
-cbind(df, data.frame(season = c("Summer", "Autumn", "Winter", "Spring"), temp = c(20, 5, -10, 5)))
-```
-
-# Комбинирование data frame: `merge`
-
-. . .
-
-```{r}
-df
-```
-
-. . .
-
-```{r}
-df_salary <- data.frame(x = c(3, 2, 6, 1), salary = c(100, 1000, 300, 500))
-merge(df, df_salary, by = "x")
-```
-
-. . . 
-
-Для тех, кто знаком с SQL: это inner join. 
-
-Остальные типы (left, right, outer, cross join) легко найти на stackoverflow по запросу "r joins".
-
-# Импорт данных
-
->- Из файла:
-    + Comma separated values (.csv), tab separated values
-    + Неструктурированный текст -- `readLines`, `scan`
-    + XML, HTML -- `library(XML)`, `library(httr)`, ...
-    + JSON, YAML -- `library(rjson)`, `library(RJSONIO)`, ...
-    + Excel -- `library(XLConnect)`, `library(readxl)`
-    + SAS, Stata, SPSS, MATLAB -- `library(foreign)`, `library(sas7bdat)`
->- Web -- `library(rvest)`
->- Базы данных:
-    + Реляционные -- `library(DBI)`, `library(RSQLite)`, ...
-    + Нереляционные -- `library(rmongodb)`, ...
->- ...
-
-# Чтение табличных данных
-
-Основной инструмент: `read.table`
-
->- `file` -- имя файла
->- `header` -- наличие или отсутствие заголовка в первой строке
->- `sep` -- разделитель значений, `dec` -- десятичная точка
->- `quote` -- символы, обозначающие кавычки (для строкового типа)
->- `na.strings` -- строки, кодирующие пропущенное значение
->- `colClasses` -- типы столбцов (для быстродействия и указания типа: строка-фактор-дата/время)
->- `comment.char` -- символ, обозначающий комментарий
->- `skip` -- количество строк пропускаемых c начала файла
-
-. . .
-
-Функции `read.csv`, `read.csv2`, `read.delim` и `read.delim2` 
-суть оболочки над `read.table` с расставленными умолчаниями
-
-# Типичные этапы (пред)обработки данных
-
->- Импорт в дата фрейм
->- Очистка значений, проверка типов
->- Работа со строками: имена, переменные строкового типа, факторы
->- Пропущенные значения: идентификация, способ обработки
->- Манипулирование переменными: преобразование, создание, удаление
->- Подсчёт описательных статистик: split-apply-combine
->- Визуализация данных
->- Экспорт
-
-# Очистка значений, проверка типов
-
-Типы переменных, на которых легко ошибиться при импорте:
-
->- Числовые типы становятся строковыми
-    + из-за пропущенных значений, отмеченных не как `NA`
-      `na.strings = c("NA", "Not Available", "Missing")`
-    + из-за неверно указанных разделителя, десятичного знака <br>
-      `sep = ","`, `dec = "."`
-    + из-за кавычек, сопроводительного текста или комментариев <br>
-      `quote`, `comment.char`, `skip`
->- Строковые типы становятся факторами либо наоборот <br>
-   `as.character`, `as.factor`
->- Тип "дата/время" остаётся строковым
-   `as.POSIXct`, `as.POSIXlt`, `as.Date`
-   
-. . . 
-
-Функции `str`, `summary`, `head` и `tail` помогут определить, всё ли в порядке
-
-
-# Работа с переменными
-
->- Функции `complete.cases` и `na.omit` для удаления наблюдений с пропущенными значениями: <br>
-   `df[complete.cases(df), ]` либо `na.omit(df)`
->- Замена NA на некоторые значения может быть потенциально опасной
-    + заполнение средним может вносить смещение в данные
-    + заполнение нулями в большинстве случаев вообще некорректно!
->- Создание, изменение и удаление переменных выполняется конструкциями <br>
-    `df$new_var <- <...>`, <br>
-    `df$old_var <- f(df$old_var)`, <br>
-    `df$old_var <- NULL`
->- Кроме того, для работы сразу с большим количеством переменных есть функция `within`
-
-## Export
-
->- `write.table`, `write.csv` and `write.csv2` -- almost identical to import functions
->- If an array is big enough, it;s better to separate the pre-processing step
-    + in a separate ".R" file
-    + write the preprocessed ("clean") data in a separate file
-
-
-McNew, L. B. and C. M. Handel. 2015. 
-Evaluating species richness: biased ecological inference results 
-from spatial heterogeneity in species detection probabilities. 
-Ecological Applications 25:1669-1680. doi:10.1890/14-1248.1
-
-Ссылка на данные: [http://alaska.usgs.gov/products/data.php?dataid=5](http://alaska.usgs.gov/products/data.php?dataid=5) либо [https://github.com/tonytonov/Rcourse/blob/master/avianHabitat.csv](https://github.com/tonytonov/Rcourse/blob/master/avianHabitat.csv)
-
-
-
-# 6. Strings
-
->- String is an element of a vector of type `character`
->- Most of the functions operating with strings are vectorized
+* String is an element of a vector of type `character`
+* Most of the functions operating with strings are vectorized
 
 ```{r}
 s <- c("Trump and republicans!", 
@@ -1294,8 +1047,8 @@ s <- c("Trump and republicans!",
 #s <- enc2utf8(s)
 ```
 
->- Usually you would use quotation marks to designate a string
->- But ' ' also work: `'"Smart" watch'`
+* Usually you would use quotation marks to designate a string
+* But ' ' also work: `'"Smart" watch'`
 
 ```{r, echo=FALSE}
 '"Smart" watch'
@@ -1303,9 +1056,9 @@ s <- c("Trump and republicans!",
 
 ## Functions `paste`/`paste0`
 
->- This functions perform concatenation of string vectors with respect to rewriting rules
->- Argument `sep` -- separator between elements (by default, for `paste` it is space, for `paste0` -- empty line)
->- Argument `collapse` -- "collapses" vector into one string
+* This functions perform concatenation of string vectors with respect to rewriting rules
+* Argument `sep` -- separator between elements (by default, for `paste` it is space, for `paste0` -- empty line)
+* Argument `collapse` -- "collapses" vector into one string
 
 ```{r}
 paste(c("Beautiful", "Dirty"), "Rich")
@@ -1321,8 +1074,8 @@ paste(c("Beautiful", "Dirty"), "Rich", collapse = ", and")
 
 ## Function `strsplit`
 
->- Splits a string vector
->- **NB**: The result is a list!
+* Splits a string vector
+* **NB**: The result is a list!
 
 ```{r}
 strsplit(s, " и ", fixed = TRUE)
@@ -1337,8 +1090,8 @@ strsplit(s, "[[:punct:]]")
 
 ## Regular expressions
 
->- "Metalanguage" of search and substring manipulation
->- The search template can include usual symbols and so-called _wildcards_
+* "Metalanguage" of search and substring manipulation
+* The search template can include usual symbols and so-called _wildcards_
 
 ```{r}
 grep("Trump", s)
@@ -1400,9 +1153,9 @@ head(list.files())
 list.dirs("..", recursive = FALSE)
 ```
 
->- Use the function `setwd` to change working directory.
->- When you create a new project in RStudio, the working directory is the folder where project file `.Rproj` is located.
->- Catalogues separators in Windows: either `/`, or `\\`
+* Use the function `setwd` to change working directory.
+* When you create a new project in RStudio, the working directory is the folder where project file `.Rproj` is located.
+* Catalogues separators in Windows: either `/`, or `\\`
 
 ## Number formatting
 
@@ -1420,8 +1173,8 @@ formatC(c(pi, exp(pi)), digits = 3, format = "e")
 
 ## Function `cat`
 
->- Usually the function `print` is used for output
->- Function `cat` can print the objects "as they are"
+* Usually the function `print` is used for output
+* Function `cat` can print the objects "as they are"
 
 ```{r}
 print('"Smart" watch'); cat('"Smart" watch')
@@ -1431,3 +1184,15 @@ print('"Smart" watch'); cat('"Smart" watch')
 print("Harry\tRon\nHermione"); cat("Harry\tRon\nHermione")
 ```
 
+
+# Tasks
+
+**Excercise 1**. Create a function that takes argument n and calculates n-th element of [Fibonacchi](https://en.wikipedia.org/wiki/Fibonacci_number) sequence.
+
+**Excercise 2**. Create a `k` x `k` matrix of zeros, put `1`s in the positions where $i+j = k+2$ and calculate the sum in every column.
+
+**Excercise 3** Imagine you have a list of observations of bacterial counts in different timepoints in several dishes:
+```{r} 
+bactcounts <- list(plate_1 = c(130,240,344,560), plate_2 = c(200,267,300,222), plate_3 = c(400,370,230,190))
+```
+Calculate the means and medians of values in every plate and create a named vector `MeMe` which will contain "yes" if a mean count for a plate is less than its median and "no" otherwise.
