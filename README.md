@@ -24,16 +24,10 @@ Materials for Basic Teaching Module in EMBL Predoc Course 2016
 install.packages("rmarkdown")
 ```
 
-###Excercises:
+###Exercises:
 - [1. Simple syntax and code chunks](https://github.com/nvolkova/btm-2016/blob/master/RM-excecises/ex1.Rmd?raw=TRUE)
 - [2. Plotting, caching and formatting](https://github.com/nvolkova/btm-2016/blob/master/RM-excecises/ex2.Rmd?raw=TRUE)
 - [Bonus: make pretty slides with Rmarkdown](https://github.com/nvolkova/btm-2016/blob/master/RM-excecises/Bonus.Rmd?raw=TRUE)
-
-###Play with the dataset:
-1. Upload the dataset into R
-2. Analyse *this and that and that*
-3. Produce some nice plots
-4. Integrate with R Markdown.
 
 ##Jupyter Notebook
 
