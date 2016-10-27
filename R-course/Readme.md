@@ -1,5 +1,7 @@
 # Basic R course
 
+In order to use the tutorials, please download them to your computer and open with your browser.
+
 ## Introduction
 
 Please start with [Introduction](https://github.com/nvolkova/btm-2016/blob/master/R-course/Introduction.html) tutorial. At the end of it, you will find some exercises. Solutions to these exercises can be found [here](https://github.com/nvolkova/btm-2016/blob/master/R-course/Excercises_for_basic_R.R).
