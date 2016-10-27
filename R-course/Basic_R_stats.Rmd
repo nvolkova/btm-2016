@@ -1,0 +1,266 @@
+---
+title: "Basic R course: statistics with R"
+author: "Nadezda Volkova, Daniel Elias Martin Herranz, Jack Monahan"
+date: "BTM 2016"
+output: html_document
+---
+
+```{r}
+library(MASS)
+painters
+```
+
+Please install the package "UsingR" as well.
+
+```{r, eval=F}
+install.packages("UsingR")
+library(UsingR)
+```
+
+# Categorical data
+
+## Frequencies
+
+```{r}
+table(painters$School)
+table(painters$School)/length(painters$School)
+```
+
+## Factors
+
+```{r}
+painters$School
+as.character(painters$School)
+```
+
+## Bar charts
+
+```{r}
+school <- painters$School
+painters$School
+#barplot(school) # this isn’t correct
+barplot(table(school)) # Yes, call with summarized data
+barplot(table(school)/length(school)) # divide by n for proportion
+```
+
+## Piecharts
+
+```{r}
+school.counts = table(school) # store the table result
+pie(school.counts) # first pie -- kind of dull
+#names(school.counts) = c("Italian","Tuscanian",...) # pie() prints out names
+pie(school.counts,col=c("purple","green2","cyan","white","red","orange","blue","lightblue","black","grey")) # now with colors
+```
+
+# Numerical data
+
+## Sorting
+
+```{r}
+sals = c(12, .4, 5, 2, 50, 8, 3, 1, 4, 0.25)
+sort(sals)
+```
+
+## Mean, median, sd, vars, quantiles
+
+```{r}
+mean(sals)
+var(sals)
+sd(sals)
+median(sals)
+summary(sals)
+```
+
+## Histograms
+
+```{r}
+x <- c(29.6, 28.2, 19.6, 13.7, 13.0, 7.8, 3.4, 2.0, 1.9, 1.0, 0.7, 0.4, 0.4, 0.3, 0.3, 0.3, 0.3, 0.3, 0.2, 0.2, 0.2, 0.1, 0.1, 0.1, 0.1, 0.1)
+hist(x)     # frequencies
+hist(x,probability=TRUE) # proportions (or probabilities) 
+rug(jitter(x)) # add tick marks
+
+hist(x,breaks=10) # 10 breaks, or just hist(x,10)
+hist(x,breaks=c(0,1,2,3,4,5,10,20,max(x))) # specify break points
+```
+
+## Boxplots
+
+```{r}
+boxplot(x)
+```
+
+## Frequency polygons
+
+```{r}
+x = c(.314,.289,.282,.279,.275,.267,.266,.265,.256,.250,.249,.211,.161)
+tmp = hist(x) # store the results
+lines(c(min(tmp$breaks),tmp$mids,max(tmp$breaks)),c(0,tmp$counts,0),type="l")
+```
+
+## Densities
+
+```{r}
+data(faithful)
+attach(faithful) # make eruptions visible
+hist(eruptions,15,prob=T)  # proportions, not frequencies
+lines(density(eruptions)) # lines makes a curve, default bandwidth
+lines(density(eruptions,bw="SJ"),col="red") # Use SJ bandwidth, in red
+```
+
+# Bivariate data
+
+## Categorical -- categorical
+
+```{r}
+smokes = c("Y","N","N","Y","N","Y","Y","Y","N","Y") 
+amount = c(1,2,2,3,3,1,2,1,3,2)
+table(smokes,amount)
+```
+
+```{r}
+tmp=table(smokes,amount) # store the table
+old.digits = options("digits") # store the number of digits
+options(digits=3)
+prop.table(tmp,1)
+prop.table(tmp,2)
+amount
+# only print 3 decimal places #therowssumto1now
+```
+
+```{r}
+barplot(table(smokes,amount))
+barplot(table(amount,smokes))
+smokes=factor(smokes) # for names 
+barplot(table(smokes,amount),
+        beside=TRUE, # put beside not stacked
+        legend.text=T) # add legend >
+barplot(table(amount,smokes),main="table(amount,smokes)",
+        beside=TRUE,
+        legend.text=c("less than 5","5-10","more than 10"))
+```
+
+## Numerical -- categorical
+
+Imagine you have measurements from same experiment with control group and test group. Plot them together to see how they look like with respect to each other.
+
+```{r}
+x = c(5, 5, 5, 13, 7, 11, 11, 9, 8, 9)
+y = c(11, 8, 4, 5, 9, 5, 10, 5, 4, 10)
+boxplot(x,y)
+```
+
+Or you could also put it this way:
+
+```{r}
+amount <- c(5, 5, 5, 13, 7, 11, 11, 9, 8, 9, 11, 8, 4, 5, 9, 5, 10,5, 4, 10)
+category <- c(1,1,1, 1,1, 1, 1,1,1,1, 2,2,2,2,2,2, 2,2,2, 2)
+boxplot(amount ~ category) # note the tilde ~
+```
+
+## Numerical -- numerical
+
+### Compare two distributions with plots
+
+```{r}
+library(ggplot2)
+data(diamonds)
+attach(diamonds)
+ideal <- diamonds$price[diamonds$cut=="Ideal"]
+premium <- diamonds$price[diamonds$cut=="Premium"]
+boxplot(ideal,premium) 
+```
+
+### Scatterplots
+
+```{r}
+plot(diamonds$carat,diamonds$price)
+```
+
+# Linear regression
+
+```{r}
+y = diamonds$price
+x = diamonds$carat
+plot(x,y)
+abline(lm(y ~ x), col="red")
+```
+
+```{r}
+lm.res = lm(y~x) # store the answers in lm.res
+coef(lm.res)
+coef(lm.res)[1] # first one, use [2] for second
+```
+
+## Residuals
+
+```{r}
+summary(residuals(lm.res))
+```
+
+```{r}
+qqnorm(residuals(lm.res))
+abline(0,1,col="red")
+plot(residuals(lm.res))
+```
+
+## Correlation
+
+```{r}
+cor(x,y) # to find R
+cor(x,y)^2 # to find R^2
+```
+
+
+
+# Tasks
+
+**Exercise 1.** For the Simple data sets `bumpers`, `firstchi`, `math` make a histogram. Try to predict the mean, median and standard deviation. Check your guesses with the appropriate R commands.
+
+
+**Exercise 2.** A student evaluation of a teacher is on a 1-5 Leichert scale. Suppose the answers to the first 3 questions are given in this table:
+
+Student         Ques. 1     Ques. 2        Ques. 3
+-------      ---------    ---------     ---------- 
+      1             3             5             1
+      2             3             2             3
+      3             3             5             1
+      4             4             5             1
+      5             3             2             1
+      6             4             2             3
+      7             3             5             1
+      8             4             5             1     
+      9             3             4             1
+     10             4             2             1
+      
+Enter in the data for question 1 and 2.
+```{r}
+evaluation = data.frame(Student=1:10,Ques1=c(3,3,3,4,3,4,3,4,3,4),Ques2=c(5,2,5,5,2,2,5,5,4,2),Ques3=c(1,3,1,1,1,3,1,1,1,1))
+```
+
+1. Make a table of the results of question 1 and question 2 separately.
+2. Make a contingency table of questions 1 and 2.
+3. Make a stacked barplot of questions 2 and 3.
+4. Make a side-by-side barplot of all 3 questions.
+
+**Exercise 3.** The built-in data set `mtcars` contains information about cars from a 1974 Motor Trend issue. Load the data set (data(mtcars)) and try to answer the following:
+
+1. What are the variable names? (Try `names`.)
+2. what is the maximum mpg
+3. Which car has this?
+4. What are the first 5 cars listed?
+5. What are all the values for the Mercedes 450slc (`Merc 450SLC`)?
+6. Make a scatterplot of cylinders (`cyl`) vs. miles per gallon (`mpg`). Fit a regression line. Is this a good candidate for linear regression?
+
+**Exercise 4.** You performed a genetic modification of bacteria. You wanted to estimate how this modification influenced its life span and measured the lengths of life for 25 bacteria. But your colleague told you that he already did this modification and length of life was equal to 80 minutes. Is your colleague right? Can you trust him or is he just trying to ruin your research?
+```{r}
+life_span <- c(88.1182719073621, 94.8332872750113, 93.216098240428, 94.4837517244522, 89.0162824741825, 98.3549941533524, 90.9306505649222, 79.4738128933811, 95.7943525794675, 79.907550971115, 67.5608620077608, 84.1118666207429, 80.4405426387418, 93.8668348621264, 77.2212434214561, 68.1068633480655, 84.8906327374611, 75.2442966398898, 92.1865794241239, 92.1903595428325, 83.4280593426128, 81.6008659108239, 74.223954191764, 106.223060058316, 91.3518150269478)
+t.test(life_span, mu=80)
+```
+
+**Exercise 5**. You have group of samples who recieved new drug and group of sample that were cured according to the standard protocol. You were told that 20 patients with the disease were selected from the population and divided into 2 equal groups: 10 and 10. You measure hormone levels that are known to be distributed normally, and the lower level is the better. Is your new drug better?
+
+```{r}
+treated_group <- c(9830.76249436958, 6161.37243638468, 13131.8353604025, 10284.6598357407, 9245.98726622183, 7175.32445354559, 11174.4236746503, 12437.8577787669, 7093.47847958366, 9925.07623800654)
+control_group <- c(12253.9047358527, 11425.4583361033, 11659.6962460054, 11759.4030595056, 9671.33755357213, 13352.9689425818, 7974.08085172749, 11220.3927754223, 12885.6045226814, 13032.8169883379)
+t.test(treated_group, control_group,alternative="less")
+```
