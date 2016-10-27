@@ -6,11 +6,11 @@ Please start with [Introduction](https://github.com/nvolkova/btm-2016/blob/maste
 
 ## Basic stats
 
-Some hints on basic statistics along with exercises are in this tutorial. If needed, look up the solutions here.
+Some hints on basic statistics along with exercises are in [this tutorial](https://github.com/nvolkova/btm-2016/blob/master/R-course/Basic_R_stats.html). If needed, look up the solutions [here](https://github.com/nvolkova/btm-2016/blob/master/R-course/Basic_R_Stats_exercises_with_solutions.R).
 
 ## Data frames
 
-A little bit of info on data frames and how to work with them. Will be continued by Hugo Samano's tutorial, link is inside the file.
+A little bit of [info on data frames](https://github.com/nvolkova/btm-2016/blob/master/R-course/Data_frames.html) and how to work with them. Will be continued by Hugo Samano's tutorial, link is inside the file.
 
 ## Acknoledgements
 
