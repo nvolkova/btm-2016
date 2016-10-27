@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Please start with [Introduction] tutorial. At the end of it, you will find some exercises. Solutions to these exercises can be found here.
+Please start with [Introduction](https://github.com/nvolkova/btm-2016/blob/master/R-course/Introduction.html) tutorial. At the end of it, you will find some exercises. Solutions to these exercises can be found here.
 
 ## Basic stats
 
